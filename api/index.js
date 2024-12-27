@@ -1,8 +1,12 @@
-import express, { json } from 'express'
-import morgan from 'morgan'
-import createError from 'http-errors'
-import dotenv from 'dotenv' ; dotenv.config();
-import cors from 'cors'
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const morgan = require('morgan');
+const createError =  require('http-errors');
+const authRouter = require('./routes/authRoutes');
+
+dotenv.config();
+
 
 const app = express()
 
@@ -12,14 +16,17 @@ app.use(morgan('dev')); // loging all things
 app.use(cors());
 
 
+
 app.get("/", async (req,res)=>{
     res.send("NO ROOT HERE");
 })
 
+app.use('/auth',authRouter);
 
 app.use(async (req,res,next) =>{
     next(createError.NotFound("FILE DOES NOT EXIST"));
 })
+
 
 app.use((err,req,res,next)=>{
     res.status(err.status || 500);
