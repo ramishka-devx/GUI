@@ -2,7 +2,8 @@ const db = require('../config/db');
 
 const getCanteens = async (req, res) => {
     try {
-        db.query("SELECT * FROM canteens", (error, canteens) => {
+        const q = "SELECT * FROM canteens"
+        db.query(q, (error, canteens) => {
             if (error) {
                 console.error("Error fetching canteens:", error.message);
                 return res.status(500).json({ error: 'Failed to fetch canteens' });
@@ -26,7 +27,8 @@ const getCategoriesByCanteen = async (req, res) => {
     }
 
     try {
-        db.query("SELECT * FROM categories WHERE canteenId = ?", [canteenId], (error, categories) => {
+        const q = "SELECT * FROM categories WHERE canteenId = ?"
+        db.query(q, [canteenId], (error, categories) => {
             if (error) {
                 console.error("Error fetching categories:", error.message);
                 return res.status(500).json({ error: 'Failed to fetch categories' });
@@ -54,7 +56,8 @@ const getFoodsByCategory = async (req, res) => {
 
     try {
         // Query to get the total count of foods for the given category
-        db.query("SELECT COUNT(*) as count FROM foods WHERE categoryId = ?", [categoryId], (error, results) => {
+        const q = "SELECT COUNT(*) as count FROM foods WHERE categoryId = ?"
+        db.query(q, [categoryId], (error, results) => {
             if (error) {
                 console.error("Error fetching food count:", error.message);
                 return res.status(500).json({ error: 'Failed to fetch food count' });
