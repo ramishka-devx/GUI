@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { loginUser } from '../../services/authServices';
+import { loginUser } from '../../api/authServices';
 
 const Login = () => {
   const {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { registerUser } from '../../services/authServices';
+import { registerUser } from '../../api/authServices';
 
 const Register = () => {
   const {
