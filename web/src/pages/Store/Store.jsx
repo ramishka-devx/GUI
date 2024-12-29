@@ -74,105 +74,107 @@ const Store = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">Canteen Menu</h1>
+    <div className="relative bg-myBgWhite bg-opacity-10 border mx-40 px-12 min-h-screen overflow-auto">
+      <div className="w-full max-w-5xl mx-auto py-10">
+        <h1 className="text-3xl font-bold mb-6 text-center">Canteen Menu</h1>
 
-      {/* Canteen Selection */}
-      <h2 className="text-xl font-semibold mb-4">Select a Canteen</h2>
-      {loadingCanteens ? (
-        <div className="flex justify-center mb-6">
-          <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-blue-500"></div>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-          {canteens.map(canteen => (
-            <button
-              key={canteen.canteenId}
-              onClick={() => setSelectedCanteen(canteen.canteenId)}
-              className={`p-4 border rounded text-center transition ${
-                selectedCanteen === canteen.canteenId
-                  ? 'bg-blue-500 text-white border-blue-500'
-                  : 'bg-gray-200 hover:bg-gray-300'
-              }`}
-            >
-              {canteen.title}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Category Selection */}
-      {categories.length > 0 && (
-        <>
-          <h2 className="text-xl font-semibold mb-4">Select a Category</h2>
-          {loadingCategories ? (
-            <div className="flex justify-center mb-6">
-              <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-green-500"></div>
-            </div>
-          ) : (
-            <div className="flex flex-wrap gap-4 mb-6">
-              {categories.map(category => (
-                <button
-                  key={category.categoryId}
-                  onClick={() => setSelectedCategory(category.categoryId)}
-                  className={`px-6 py-3 border rounded text-center transition ${
-                    selectedCategory === category.categoryId
-                      ? 'bg-green-500 text-white border-green-500'
-                      : 'bg-gray-200 hover:bg-gray-300'
-                  }`}
-                >
-                  {category.title}
-                </button>
-              ))}
-            </div>
-          )}
-        </>
-      )}
-
-      {/* Food Display */}
-      {foods.length > 0 && (
-        <>
-          <h3 className="text-lg font-semibold mb-4">Available Foods</h3>
-          {loadingFoods ? (
-            <div className="flex justify-center mb-6">
-              <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-gray-500"></div>
-            </div>
-          ) : (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {foods.map(food => (
-                <li
-                  key={food.foodId}
-                  className="p-4 border rounded bg-gray-100 shadow hover:shadow-lg"
-                >
-                  <h4 className="font-semibold">{food.title}</h4>
-                  <p className="text-gray-700">Price: ${food.price.toFixed(2)}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {/* Pagination */}
-          <div className="flex justify-center mt-6">
-            <button
-              className="px-4 py-2 mx-1 border rounded bg-gray-200 hover:bg-gray-300"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <span className="px-4 py-2 mx-1">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              className="px-4 py-2 mx-1 border rounded bg-gray-200 hover:bg-gray-300"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
+        {/* Canteen Selection */}
+        <h2 className="text-xl font-semibold mb-4">Select a Canteen</h2>
+        {loadingCanteens ? (
+          <div className="flex justify-center mb-6">
+            <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-blue-500"></div>
           </div>
-        </>
-      )}
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            {canteens.map(canteen => (
+              <button
+                key={canteen.canteenId}
+                onClick={() => setSelectedCanteen(canteen.canteenId)}
+                className={`p-4 border rounded text-center transition ${
+                  selectedCanteen === canteen.canteenId
+                    ? 'bg-blue-500 text-white border-blue-500'
+                    : 'bg-gray-200 hover:bg-gray-300'
+                }`}
+              >
+                {canteen.title}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Category Selection */}
+        {categories.length > 0 && (
+          <>
+            <h2 className="text-xl font-semibold mb-4">Select a Category</h2>
+            {loadingCategories ? (
+              <div className="flex justify-center mb-6">
+                <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-green-500"></div>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-4 mb-6">
+                {categories.map(category => (
+                  <button
+                    key={category.categoryId}
+                    onClick={() => setSelectedCategory(category.categoryId)}
+                    className={`px-6 py-3 border rounded text-center transition ${
+                      selectedCategory === category.categoryId
+                        ? 'bg-green-500 text-white border-green-500'
+                        : 'bg-gray-200 hover:bg-gray-300'
+                    }`}
+                  >
+                    {category.title}
+                  </button>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Food Display */}
+        {foods.length > 0 && (
+          <>
+            <h3 className="text-lg font-semibold mb-4">Available Foods</h3>
+            {loadingFoods ? (
+              <div className="flex justify-center mb-6">
+                <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-gray-500"></div>
+              </div>
+            ) : (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {foods.map(food => (
+                  <li
+                    key={food.foodId}
+                    className="p-4 border rounded bg-gray-100 shadow hover:shadow-lg"
+                  >
+                    <h4 className="font-semibold">{food.title}</h4>
+                    <p className="text-gray-700">Price: ${food.price.toFixed(2)}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Pagination */}
+            <div className="flex justify-center mt-6">
+              <button
+                className="px-4 py-2 mx-1 border rounded bg-gray-200 hover:bg-gray-300"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span className="px-4 py-2 mx-1">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                className="px-4 py-2 mx-1 border rounded bg-gray-200 hover:bg-gray-300"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

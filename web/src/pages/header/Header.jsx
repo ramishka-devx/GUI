@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
-import Store  from "../Store/Store";
-import { Link } from "react-router-dom";
+import Store from "../Store/Store";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
+import AuthBox from "../../comp/AuthBox";
 
 const OnlineCanteen = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  //checking user has previously logged in
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+  },[])
   // Scroll handler to toggle isScrolled state
   useEffect(() => {
     const handleScroll = () => {
@@ -24,18 +34,8 @@ const OnlineCanteen = () => {
   return (
     <div className="relative bg-gray-200 min-h-screen overflow-auto">
       {/* Login Button */}
-      <div className="flex gap-2 absolute top-4 right-4 z-30">
-        <Link to="/login">
-          <button className="bg-MyBeat text-yellow-400 px-4 py-2 shadow-md pointer transition duration-300 focus:outline-none w-24">
-            Login
-          </button>
-        </Link>
-        <Link to="/register">
-          <button className="bg-MyBeat text-yellow-400 px-4 py-2 shadow-md pointer transition duration-300 focus:outline-none w-24">
-            Register
-          </button>
-        </Link>
-      </div>
+
+      <AuthBox setIsLoggedIn = {setIsLoggedIn} isLoggedIn = {isLoggedIn} />
       {/* Main Content */}
       <div className="relative z-20">
         {/* Image Section */}
@@ -82,8 +82,12 @@ const OnlineCanteen = () => {
         </div>
 
         {/* Gray Section with Cards */}
-        <div className="bg-gray-200 w-full py-10">
-          <Store />
+        <div className="w-full py-10" style={{ background: "transparent" }}>
+          <Routes>
+            <Route path="/" element={<Store />} />
+            <Route path="/login" element={<Login setIsLoggedIn = {setIsLoggedIn} />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
         </div>
       </div>{" "}
       {/* End Main Content */}

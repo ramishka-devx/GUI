@@ -1,27 +1,33 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../../api/authServices';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     try {
       const response = await loginUser(data);
       alert(response.data.message);
-      console.log('Token:', response.data.token); // Store the token as needed
+      localStorage.setItem('token', response.data.token);
+      console.log('Token:', response.data.token); 
+      setIsLoggedIn(true);
+      navigate("/")// Store the token as needed
     } catch (error) {
       alert(error.response?.data?.message || 'Something went wrong');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="bg-white p-8 shadow-lg rounded-lg max-w-md w-full">
+    <div className="flex items-center justify-center min-h-screen ">
+      <div className=" p-8 shadow-lg rounded-lg max-w-md w-full bg-myBgWhite bg-opacity-10">
         <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Identifier */}
