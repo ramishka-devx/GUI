@@ -24,7 +24,7 @@ app.get("/", async (req,res)=>{
 
 app.use('/auth',authRouter);
 app.use('/store',storeRouter);
-app.use('/orders', orderRouter);
+// app.use('/orders', orderRouter);
 
 app.use(async (req,res,next) =>{
     next(createError.NotFound("FILE DOES NOT EXIST"));
