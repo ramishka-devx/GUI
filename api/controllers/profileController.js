@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const db = require("../config/db");
+const env = require("dotenv").config();
 
 const getOrderHistory = async (req, res) => {
   // Extract the JWT token from the Authorization header

@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { fetchOrderHistory } from "../../api/profileAPI";
+import { useNavigate } from "react-router-dom";
 import OrderHistory from "../../comp/orderHistory/OrderHistory";
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProfilePage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
+
     const loadOrderHistory = async () => {
       try {
         setLoading(true);
@@ -15,6 +20,7 @@ const ProfilePage = () => {
         if (!token) {
           setError("You must be logged in to view your order history.");
           setLoading(false);
+          navigate("/login");
           return;
         }
 
