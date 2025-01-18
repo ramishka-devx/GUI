@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -13,14 +15,13 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const toggleProfile = () => {
     setProfileOpen(!profileOpen);
-  }
+  };
 
   const handleSignOut = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("token");
     navigate("/login");
-    
-  }
+  };
 
   return (
     <nav className="navbar">
@@ -37,6 +38,13 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
         {/* Actions */}
         <div className="navbar-actions">
+          <button className="cart-btn">
+            <Link to="/cart">
+            <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
+            <span className="cart-badge">{cartItemCounter}</span>
+            </Link>
+          </button>
+
           <button
             type="button"
             className="user-menu-button"
@@ -46,7 +54,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             <span className="sr-only">Open user menu</span>
             <img src="dp.png" alt="user" className="user-menu-img " />
           </button>
-          <div className={`user-dropdown ${profileOpen ? 'active' : ''}`}>
+          <div className={`user-dropdown ${profileOpen ? "active" : ""}`}>
             <div className="dropdown-header">
               <span className="dropdown-name">Bonnie Green</span>
               <span className="dropdown-email">name@flowbite.com</span>
@@ -61,9 +69,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               <li>
                 <a href="#">Earnings</a>
               </li>
-              <li onClick={handleSignOut}>
-                Sign out
-              </li>
+              <li onClick={handleSignOut}>Sign out</li>
             </ul>
           </div>
 
@@ -106,7 +112,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               <a href="#">About</a>
             </li>
             <li>
-              <a href="#">Services</a>
+              <a href="/store">Order</a>
             </li>
             <li>
               <a href="#">Pricing</a>

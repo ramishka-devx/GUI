@@ -1,67 +1,64 @@
-const db = require('../config/db');
+const jwt = require("jsonwebtoken");
+const db = require("../config/db");
 
-const createOrder = async (req, res) => {
-    const { userId, items } = req.body;
+const placeOrder = async (req, res) => {
+  const { items } = req.body;
 
-    if (!userId || !items || items.length === 0) {
-        return res.status(400).json({ error: 'Invalid order data' });
+  // Get the userId from the JWT token
+  const token = req.headers["authorization"];
+  if (!token) {
+    return res.status(401).json({ message: "Authorization token missing" });
+  }
+
+  try {
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decodedData.userId;
+
+    if (!userId || !items || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ message: "Invalid request payload" });
     }
 
-    try {
-        // Start a transaction
-        db.beginTransaction((err) => {
-            if (err) throw err;
+    // Calculate total price
+    const totalPrice = items.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
 
-            // Insert order
-            const orderQuery = 'INSERT INTO orders (userId, total_price) VALUES (?, ?)';
-            db.query(orderQuery, [userId, 0], (err, result) => {
-                if (err) {
-                    return db.rollback(() => {
-                        throw err;
-                    });
-                }
+    // Start transaction
+    await db.beginTransaction();
 
-                const orderId = result.insertId;
-                let totalPrice = 0;
+    // Insert into 'orders' table
+    const orderQuery = `
+      INSERT INTO orders (userId, total_price)
+      VALUES (?, ?)
+    `;
+    const orderResult = await db.query(orderQuery, [userId, totalPrice]);
+    const orderId = orderResult.insertId;
 
-                // Insert order items
-                const orderItemsQuery = 'INSERT INTO orderItems (orderId, foodId, quantity, price) VALUES ?';
-                const orderItemsData = items.map(item => {
-                    totalPrice += item.price * item.quantity;
-                    return [orderId, item.foodId, item.quantity, item.price];
-                });
+    // Insert each item into 'orderItems' table
+    const orderItemsQuery = `
+      INSERT INTO orderItems (orderId, foodId, quantity, price)
+      VALUES ?
+    `;
+    const orderItemsData = items.map((item) => [
+      orderId,
+      item.foodId,
+      item.quantity,
+      item.price,
+    ]);
 
-                db.query(orderItemsQuery, [orderItemsData], (err) => {
-                    if (err) {
-                        return db.rollback(() => {
-                            throw err;
-                        });
-                    }
+    await db.query(orderItemsQuery, [orderItemsData]);
 
-                    // Update total price
-                    const updateOrderQuery = 'UPDATE orders SET total_price = ? WHERE orderId = ?';
-                    db.query(updateOrderQuery, [totalPrice, orderId], (err) => {
-                        if (err) {
-                            return db.rollback(() => {
-                                throw err;
-                            });
-                        }
+    // Commit the transaction
+    await db.commit();
 
-                        db.commit((err) => {
-                            if (err) {
-                                return db.rollback(() => {
-                                    throw err;
-                                });
-                            }
-                            res.status(201).json({ message: 'Order created successfully', orderId });
-                        });
-                    });
-                });
-            });
-        });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    res.status(201).json({ message: "Order placed successfully", orderId });
+  } catch (error) {
+    // Rollback transaction in case of an error
+    console.error("Failed to place order:", error);
+    await db.rollback();
+    res.status(500).json({ message: "Failed to place order", error });
+  }
 };
 
-module.exports = { createOrder };
+module.exports = { placeOrder };

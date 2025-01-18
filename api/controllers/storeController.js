@@ -48,6 +48,7 @@ const getFoodsByCategory = async (req, res) => {
     const categoryId = req.query.categoryId;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 9;
+    
     const offset = (page - 1) * limit;
 
     if (!categoryId) {

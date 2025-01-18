@@ -1,0 +1,256 @@
+/* General Layout */
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px; /* Add spacing between sections */
+}
+
+.canteen-selector label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.canteen-selector select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+/* Selector Container */
+.selector-container {
+  display: flex;
+  flex-direction: column; /* Default for mobile */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Horizontal Scrollable Categories */
+.category-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ccc transparent;
+}
+
+.category-scroll::-webkit-scrollbar {
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+.category-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.category-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent text wrapping */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.category-btn:hover {
+  background-color: #007bff;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.category-btn.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* Foods Display */
+.foods-display {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Food Card Container */
+/* Food Card Container */
+.food-items {
+  display: grid;
+  grid-template-columns: 1fr; /* Adjusted grid for larger cards */
+  gap: 20px;
+}
+
+/* Food Card */
+.food-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+
+/* Food Image */
+.food-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Ensures the image fits nicely */
+  border-bottom: 1px solid #ddd;
+}
+
+/* Food Details */
+.food-details {
+  padding: 15px;
+}
+
+.food-details h4 {
+  font-size: 1.4rem; /* Larger title */
+  margin: 10px 0;
+  color: #333;
+  font-weight: 600; /* Bold text for emphasis */
+  line-height: 1.2;
+}
+
+.food-price {
+  font-size: 1.2rem; /* Emphasized price */
+  font-weight: bold;
+  color: #28a745;
+  margin: 8px 0;
+}
+
+/* Food Actions */
+.food-actions {
+  margin-top: auto; /* Push buttons to the bottom */
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.food-actions .btn {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.food-actions .btn:hover {
+  transform: scale(1.05);
+}
+
+/* Add to Cart Button */
+.food-actions .btn.add-to-cart {
+  background-color: #ffc107; /* Yellow for "Add to Cart" */
+  color: #000;
+  font-weight: 500;
+}
+
+.food-actions .btn.add-to-cart:hover {
+  background-color: #e0a800;
+}
+
+/* Buy Now Button */
+.food-actions .btn.buy-now {
+  background-color: #007bff; /* Blue for "Buy Now" */
+  color: white;
+  font-weight: 500;
+}
+
+.food-actions .btn.buy-now:hover {
+  background-color: #0056b3;
+}
+
+/* Quantity Input */
+.quantity-input {
+  width: 50px;
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Remove Button */
+.food-actions .btn.remove-from-cart {
+  background-color: #dc3545;
+  color: white;
+}
+
+.food-actions .btn.remove-from-cart:hover {
+  background-color: #c82333;
+}
+
+
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #e0e0e0;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .selector-container {
+    flex-direction: row; /* Align selectors in a row for desktop */
+    align-items: center;
+    gap: 20px;
+  }
+
+  .canteen-selector,
+  .category-scroll {
+    flex: 1; /* Equal space for both sections */
+  }
+
+  .orders-container {
+    padding: 50px;
+  }
+  .food-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Adjusted grid for larger cards */
+    gap: 20px;
+  }
+}
