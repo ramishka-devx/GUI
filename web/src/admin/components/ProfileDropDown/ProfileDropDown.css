@@ -1,0 +1,117 @@
+.profile-dropdown {
+    position: relative;
+    order: 4;
+  }
+  
+  .profile-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .profile-photo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db; /* Adds a subtle border around the photo */
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  
+  .profile-photo:hover {
+    transform: scale(1.1);
+    border-color: #4a90e2;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: #ffffff;
+    color: #131212;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    width: 240px;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .dropdown-header {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+  }
+  
+  .dropdown-header p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .dropdown-header .email {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 400;
+  }
+  
+  .dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dropdown-list li {
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s;
+  }
+  
+  .dropdown-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .dropdown-list .dropdown-link {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #222222;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .dropdown-list .dropdown-link:hover {
+    background: #f3f4f6;
+    color: #2563eb;
+  }
+  
+  .dropdown-list .dropdown-signout {
+    display: block;
+    padding: 12px 15px;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #d32f2f;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .dropdown-list .dropdown-signout:hover {
+    background: #f3f4f6;
+    color: #b71c1c;
+  }
+  

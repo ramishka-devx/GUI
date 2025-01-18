@@ -3,6 +3,7 @@ import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import ProfileDropdown from "../../admin/components/ProfileDropDown/ProfileDropDown";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,65 +37,16 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
           <span className="navbar-logo-text">Kalderama</span>
         </a>
 
-        {/* Actions */}
-        <div className="navbar-actions">
+        {/* profile */}
+        <div className="navbar-actions hidden">
+
           <button className="cart-btn">
             <Link to="/cart">
-            <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
-            <span className="cart-badge">{cartItemCounter}</span>
+              <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
+              <span className="cart-badge">{cartItemCounter}</span>
             </Link>
           </button>
-
-          <button
-            type="button"
-            className="user-menu-button"
-            id="user-menu-button"
-            onClick={toggleProfile}
-          >
-            <span className="sr-only">Open user menu</span>
-            <img src="dp.png" alt="user" className="user-menu-img " />
-          </button>
-          <div className={`user-dropdown ${profileOpen ? "active" : ""}`}>
-            <div className="dropdown-header">
-              <span className="dropdown-name">Bonnie Green</span>
-              <span className="dropdown-email">name@flowbite.com</span>
-            </div>
-            <ul className="dropdown-menu">
-              <li>
-                <a href="#">Dashboard</a>
-              </li>
-              <li>
-                <a href="#">Settings</a>
-              </li>
-              <li>
-                <a href="#">Earnings</a>
-              </li>
-              <li onClick={handleSignOut}>Sign out</li>
-            </ul>
-          </div>
-
-          <button
-            className="mobile-menu-toggle"
-            aria-controls="navbar-user"
-            aria-expanded={menuOpen}
-            onClick={toggleMenu}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="menu-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
+          <ProfileDropdown handleSignOut={handleSignOut} />
         </div>
 
         {/* Navbar Menu */}

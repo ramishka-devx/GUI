@@ -4,6 +4,8 @@ import axios from "axios"; // For making API calls
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+const baseURL = process.env.REACT_APP_API_BASE_URL;
+
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -57,7 +59,7 @@ const Cart = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5369/orders/create", // Replace with your API endpoint
+        `${baseURL}/orders/create`, // Replace with your API endpoint
         { items: cart },
         {
           headers: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import OnlineCanteen from "./pages/header/Header";
@@ -11,30 +11,34 @@ import Slideshow from "./comp/slide/SlideShow";
 import HeroSection from "./comp/Hero/Hero";
 import Cart from "./pages/cart/Cart";
 import ProfilePage from "./pages/profile/Profile";
+import AdminHome from "./admin/pages/adminHome/AdminHome";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartItemCounter, setCartItemCounter] = useState(0);
 
   // set cart count at initial render
-    useEffect(() => {
-      const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-      setCartItemCounter(storedCart.length);
-    }, []);
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItemCounter(storedCart.length);
+  }, []);
+
+  const ShowNavbarOrAdmin = () => {
+    const location = useLocation();
+    const isAdminRoute = location.pathname.startsWith("/admin");
+
+    return isAdminRoute ? <AdminHome /> : <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} cartItemCounter={cartItemCounter} />;
+  };
 
   return (
     <Router>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn = {setIsLoggedIn} cartItemCounter = {cartItemCounter} />
+      <ShowNavbarOrAdmin />
       <Routes>
         <Route path="/" element={<HeroSection />} />
-        <Route
-          path="/login"
-          element={<Login setIsLoggedIn={setIsLoggedIn} />}
-        />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/register" element={<Register />} />
-
-        <Route path="/store" element={<Store setCartItemCounter = {setCartItemCounter} />} />
-        <Route path="/cart" element={<Cart setCartItemCounter = {setCartItemCounter} />} />
+        <Route path="/store" element={<Store setCartItemCounter={setCartItemCounter} />} />
+        <Route path="/cart" element={<Cart setCartItemCounter={setCartItemCounter} />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
 

@@ -7,6 +7,7 @@ const authRouter = require('./routes/authRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const storeRouter = require('./routes/storeRoutes');
 const profileRouter = require('./routes/profileRoutes.js');
+const adminRouter = require('./routes/adminRoutes.js');
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use('/auth',authRouter);
 app.use('/store',storeRouter);
 app.use('/orders', orderRouter);
 app.use('/profile', profileRouter);
+app.use('/admin', adminRouter);
 
 app.use(async (req,res,next) =>{
     next(createError.NotFound("FILE DOES NOT EXIST"));
