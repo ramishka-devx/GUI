@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../../api/authServices';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = ({setIsLoggedIn}) => {
   const {
@@ -15,13 +17,13 @@ const Login = ({setIsLoggedIn}) => {
   const onSubmit = async (data) => {
     try {
       const response = await loginUser(data);
-      alert(response.data.message);
+      toast.success(response.data.message);
       localStorage.setItem('token', response.data.token);
       console.log('Token:', response.data.token); 
       setIsLoggedIn(true);
       navigate("/")// Store the token as needed
     } catch (error) {
-      alert(error.response?.data?.message || 'Something went wrong');
+      toast.error(error.response?.data?.message || 'Something went wrong');
     }
   };
 

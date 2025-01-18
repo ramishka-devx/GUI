@@ -1,0 +1,118 @@
+/* Order History Container */
+.order-history-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .order-history-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .no-orders {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #999;
+  }
+  
+  /* Orders List */
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Order Card */
+  .order-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  
+  .order-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  .order-date,
+  .order-status {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .order-status .pending {
+    color: #ff9800;
+  }
+  
+  .order-status .completed {
+    color: #4caf50;
+  }
+  
+  /* Order Items */
+  .order-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .order-item {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .item-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .item-details {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .item-total {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Order Footer */
+  .order-footer {
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .order-header {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .order-items {
+      grid-template-columns: 1fr;
+    }
+  }

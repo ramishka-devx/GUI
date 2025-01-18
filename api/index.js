@@ -4,7 +4,9 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const createError =  require('http-errors');
 const authRouter = require('./routes/authRoutes');
+const orderRouter = require('./routes/orderRoutes');
 const storeRouter = require('./routes/storeRoutes');
+const profileRouter = require('./routes/profileRoutes.js');
 
 dotenv.config();
 
@@ -25,11 +27,11 @@ app.get("/", async (req,res)=>{
 app.use('/auth',authRouter);
 app.use('/store',storeRouter);
 app.use('/orders', orderRouter);
+app.use('/profile', profileRouter);
 
 app.use(async (req,res,next) =>{
     next(createError.NotFound("FILE DOES NOT EXIST"));
 })
-
 
 app.use((err,req,res,next)=>{
     res.status(err.status || 500);

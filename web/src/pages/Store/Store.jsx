@@ -1,29 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { fetchCanteens, fetchCategories, fetchFoods } from '../../api/storeAPI';
+import React, { useState, useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { fetchCanteens, fetchCategories, fetchFoods } from "../../api/storeAPI";
+import "./Store.css";
 
-const Store = () => {
+const Orders = ({setCartItemCounter}) => {
   const [canteens, setCanteens] = useState([]);
   const [categories, setCategories] = useState([]);
   const [foods, setFoods] = useState([]);
+  const [cart, setCart] = useState([]); // Track cart items
   const [selectedCanteen, setSelectedCanteen] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [loadingCanteens, setLoadingCanteens] = useState(true);
   const [loadingCategories, setLoadingCategories] = useState(false);
   const [loadingFoods, setLoadingFoods] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const [totalPages, setTotalPages] = useState(1); // Total pages from the API
 
+  // Load cart from local storage on page load
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
+  }, []);
+
+  // Fetch canteens on mount
   useEffect(() => {
     const loadCanteens = async () => {
       try {
         setLoadingCanteens(true);
-        const data = await fetchCanteens();
-        setCanteens(data);
-        if (data.length > 0) {
-          setSelectedCanteen(data[0].canteenId); // Automatically select the first canteen
+        const canteenData = await fetchCanteens();
+        setCanteens(canteenData);
+        if (canteenData.length > 0) {
+          setSelectedCanteen(canteenData[0].canteenId);
         }
       } catch (error) {
-        console.error('Error loading canteens:', error);
+        console.error("Failed to load canteens:", error);
       } finally {
         setLoadingCanteens(false);
       }
@@ -31,18 +42,20 @@ const Store = () => {
     loadCanteens();
   }, []);
 
+  // Fetch categories when canteen changes
   useEffect(() => {
     if (selectedCanteen) {
       const loadCategories = async () => {
         try {
           setLoadingCategories(true);
-          const data = await fetchCategories(selectedCanteen);
-          setCategories(data);
-          if (data.length > 0) {
-            setSelectedCategory(data[0].categoryId); // Automatically select the first category
+          const categoryData = await fetchCategories(selectedCanteen);
+          setCategories(categoryData);
+          if (categoryData.length > 0) {
+            setSelectedCategory(categoryData[0].categoryId);
+            setCurrentPage(1); // Reset to first page when category changes
           }
         } catch (error) {
-          console.error('Error loading categories:', error);
+          console.error("Failed to load categories:", error);
         } finally {
           setLoadingCategories(false);
         }
@@ -51,16 +64,17 @@ const Store = () => {
     }
   }, [selectedCanteen]);
 
+  // Fetch foods when category or page changes
   useEffect(() => {
     if (selectedCategory) {
       const loadFoods = async () => {
         try {
           setLoadingFoods(true);
-          const data = await fetchFoods(selectedCategory, currentPage);
-          setFoods(data.foods);
-          setTotalPages(data.pagination.totalPages);
+          const foodData = await fetchFoods(selectedCategory, currentPage, 3); // Limit 2 items per page
+          setFoods(foodData.foods);
+          setTotalPages(foodData.pagination.totalPages); // Update total pages
         } catch (error) {
-          console.error('Error loading foods:', error);
+          console.error("Failed to load foods:", error);
         } finally {
           setLoadingFoods(false);
         }
@@ -69,114 +83,179 @@ const Store = () => {
     }
   }, [selectedCategory, currentPage]);
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+  // Add item to cart
+  const addToCart = (food, quantity) => {
+    // Check if item already exists in the cart
+    const existingItem = cart.find((item) => item.foodId === food.foodId);
+  
+    if (existingItem) {
+      // If item exists, update the quantity
+      const updatedCart = cart.map((item) =>
+        item.foodId === food.foodId
+          ? { ...item, quantity: item.quantity + quantity }
+          : item
+      );
+      setCart(updatedCart);
+      setCartItemCounter(updatedCart.length);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    } else {
+      // If item doesn't exist, add it with the given quantity, price, and title
+      const updatedCart = [
+        ...cart,
+        { foodId: food.foodId, title: food.title, price: food.price, quantity },
+      ];
+      setCart(updatedCart);
+      setCartItemCounter(updatedCart.length);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
+  };
+  
+
+
+
+  // Remove item from cart
+  const removeFromCart = (foodId) => {
+    const updatedCart = cart.filter((item) => item.foodId !== foodId);
+    setCart(updatedCart);
+    setCartItemCounter(updatedCart.length);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  // Check if food is in cart
+  const isInCart = (foodId) => {
+    return cart.some((item) => item.foodId === foodId);
+  };
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   return (
-    <div className="relative bg-myBgWhite bg-opacity-10 border mx-40 px-12 min-h-screen overflow-auto">
-      <div className="w-full max-w-5xl mx-auto py-10">
-        <h1 className="text-3xl font-bold mb-6 text-center">Canteen Menu</h1>
+    <div className="orders-container">
+      <div className="selector-container">
+        <div className="canteen-selector">
+          {loadingCanteens ? (
+            <Skeleton height={40} width="100%" />
+          ) : (
+            <select
+              id="canteen"
+              value={selectedCanteen || ""}
+              onChange={(e) => setSelectedCanteen(Number(e.target.value))}
+            >
+              {canteens.map((canteen) => (
+                <option key={canteen.canteenId} value={canteen.canteenId}>
+                  {canteen.title}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
 
-        {/* Canteen Selection */}
-        <h2 className="text-xl font-semibold mb-4">Select a Canteen</h2>
-        {loadingCanteens ? (
-          <div className="flex justify-center mb-6">
-            <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-blue-500"></div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {canteens.map(canteen => (
+        <div className="category-scroll">
+          {loadingCategories ? (
+            [1, 2, 3].map((_, index) => (
+              <Skeleton key={index} height={40} width={100} style={{ marginRight: "10px" }} />
+            ))
+          ) : (
+            categories.map((category) => (
               <button
-                key={canteen.canteenId}
-                onClick={() => setSelectedCanteen(canteen.canteenId)}
-                className={`p-4 border rounded text-center transition ${
-                  selectedCanteen === canteen.canteenId
-                    ? 'bg-blue-500 text-white border-blue-500'
-                    : 'bg-gray-200 hover:bg-gray-300'
+                key={category.categoryId}
+                className={`category-btn ${
+                  selectedCategory === category.categoryId ? "active" : ""
                 }`}
+                onClick={() => setSelectedCategory(category.categoryId)}
               >
-                {canteen.title}
+                {category.title}
               </button>
+            ))
+          )}
+        </div>
+      </div>
+
+      <div className="foods-display">
+        {loadingFoods ? (
+          <div className="food-items">
+            {[1, 2, 3].map((_, index) => (
+              <div key={index} className="food-card">
+                <Skeleton height={150} width="100%" />
+                <Skeleton height={20} width="60%" style={{ margin: "10px auto" }} />
+                <Skeleton height={20} width="40%" />
+              </div>
             ))}
           </div>
-        )}
+        ) : (
+          <div>
+            <div className="food-items">
+              {foods.map((food) => (
+                <div key={food.foodId} className="food-card">
+                  <img src={food.image_url} alt={food.title} className="food-image" />
+                  <div className="food-details">
+                    <h4>{food.title}</h4>
+                    <p className="food-price">LKR {food.price.toFixed(2)}</p>
+                  </div>
+                  <div className="food-actions">
+                    {isInCart(food.foodId) ? (
+                      <button
+                        className="btn remove-from-cart"
+                        onClick={() => removeFromCart(food.foodId)}
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      <>
+                        <input
+                          type="number"
+                          min="1"
+                          defaultValue="1"
+                          className="quantity-input"
+                          id={`quantity-${food.foodId}`}
+                        />
+                        <button
+                          className="btn add-to-cart"
+                          onClick={() =>
+                            addToCart(
+                              food,
+                              Number(
+                                document.getElementById(`quantity-${food.foodId}`).value
+                              )
+                            )
+                          }
+                        >
+                          Add to Cart
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-        {/* Category Selection */}
-        {categories.length > 0 && (
-          <>
-            <h2 className="text-xl font-semibold mb-4">Select a Category</h2>
-            {loadingCategories ? (
-              <div className="flex justify-center mb-6">
-                <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-green-500"></div>
-              </div>
-            ) : (
-              <div className="flex flex-wrap gap-4 mb-6">
-                {categories.map(category => (
-                  <button
-                    key={category.categoryId}
-                    onClick={() => setSelectedCategory(category.categoryId)}
-                    className={`px-6 py-3 border rounded text-center transition ${
-                      selectedCategory === category.categoryId
-                        ? 'bg-green-500 text-white border-green-500'
-                        : 'bg-gray-200 hover:bg-gray-300'
-                    }`}
-                  >
-                    {category.title}
-                  </button>
-                ))}
-              </div>
-            )}
-          </>
-        )}
-
-        {/* Food Display */}
-        {foods.length > 0 && (
-          <>
-            <h3 className="text-lg font-semibold mb-4">Available Foods</h3>
-            {loadingFoods ? (
-              <div className="flex justify-center mb-6">
-                <div className="loader animate-spin rounded-full h-10 w-10 border-t-2 border-gray-500"></div>
-              </div>
-            ) : (
-              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {foods.map(food => (
-                  <li
-                    key={food.foodId}
-                    className="p-4 border rounded bg-gray-100 shadow hover:shadow-lg"
-                  >
-                    <h4 className="font-semibold">{food.title}</h4>
-                    <p className="text-gray-700">Price: ${food.price.toFixed(2)}</p>
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {/* Pagination */}
-            <div className="flex justify-center mt-6">
+            {/* Pagination Controls */}
+            <div className="pagination">
               <button
-                className="px-4 py-2 mx-1 border rounded bg-gray-200 hover:bg-gray-300"
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
               >
                 Previous
               </button>
-              <span className="px-4 py-2 mx-1">
+              <span>
                 Page {currentPage} of {totalPages}
               </span>
               <button
-                className="px-4 py-2 mx-1 border rounded bg-gray-200 hover:bg-gray-300"
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >
                 Next
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
   );
 };
 
-export default Store;
+export default Orders;

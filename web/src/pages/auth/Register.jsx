@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { registerUser } from '../../api/authServices';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const {
@@ -12,9 +14,9 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const response = await registerUser(data);
-      alert(response.data.message);
+      toast.success(response.data.message);
     } catch (error) {
-      alert(error.response?.data?.message || 'Something went wrong');
+      toast.error(error.response?.data?.errors[0]?.message || 'Something went wrong');
     }
   };
 
