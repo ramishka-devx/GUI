@@ -4,7 +4,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "./SeeOrder.css";
 import { fetchOrdersByDate, updateOrderStatus } from "../../api/adminAPI";
 
-const SeeOrders = () => {
+const SeeOrders = ({setIsbannerLoading}) => {
+
   const [canteenId, setCanteenId] = useState(localStorage.getItem("canteenId"));
   const [selectedDate, setSelectedDate] = useState(() => {
     const today = new Date();
@@ -12,10 +13,10 @@ const SeeOrders = () => {
   });
   const [search, setSearch] = useState(""); // State for search input
   const [orders, setOrders] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   const fetchOrders = async () => {
-    setIsLoading(true);
     try {
       const fetchedOrders = await fetchOrdersByDate(selectedDate, search, canteenId);
       setOrders(fetchedOrders);
@@ -32,10 +33,13 @@ const SeeOrders = () => {
 
   const handleAction = (orderId, status) => async () => {
     try {
+      setIsbannerLoading(true);
       await updateOrderStatus(orderId, status);
       fetchOrders();
     } catch (error) {
       alert(error.message);
+    }finally{
+      setIsbannerLoading(false)
     }
   };
 

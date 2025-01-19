@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from "react";
-import './SummeryCard.css'; // Optional: For styling
+import "./SummeryCard.css"; // Optional: For styling
+const baseURL = process.env.REACT_APP_API_BASE_URL;
 
-const SummaryCards = () => {
+const SummaryCards = ({ setIsLoading }) => {
   const [summary, setSummary] = useState({
     totalOrders: 0,
     totalRevenue: 0,
     pendingOrders: 0,
     completedOrders: 0,
   });
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchSummary = async () => {
       try {
-        const response = await fetch("http://localhost:5369/admin/dashboard/orders");
+        const response = await fetch(`${baseURL}/admin/dashboard/orders`);
         const data = await response.json();
         setSummary(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching summary data:", error);
-        setLoading(false);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchSummary();
   }, []);
 
-  if (loading) {
-    return <p>Loading summary data...</p>;
-  }
 
   return (
     <div className="summary-container">

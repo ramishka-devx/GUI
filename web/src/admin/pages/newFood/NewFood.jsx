@@ -4,6 +4,7 @@ import CategorySelect from "../../components/selectCategories/SelectCatogory";
 import "./NewFood.css";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const AddFood = () => {
   const [canteenId] = useState(localStorage.getItem("canteenId") || 1); 
@@ -46,7 +47,7 @@ const AddFood = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5369/admin/foods/new", // Adjust the API URL
+        `${baseURL}/admin/foods/new`, // Adjust the API URL
         data,
         {
           headers: {

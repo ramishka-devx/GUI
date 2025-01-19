@@ -1,0 +1,109 @@
+.graph-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .graph-container h2 {
+    text-align: center;
+    color: #0707075e;
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .date-range-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+ 
+
+  .date-range-form label {
+    font-size: 1rem;
+    color: #07070791;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  
+  .date-range-form input {
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    color: #070707a4 ;
+  }
+  
+  .date-range-form input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .date-range-form button {
+    background: linear-gradient(145deg, #88d4b0, #6ccba5); /* Softer green gradient */
+    color: #034d3a; /* Deep green text for better contrast */
+    padding: 12px 20px; /* Slightly increased padding for a premium feel */
+    border: none;
+    border-radius: 8px; /* Slightly more rounded corners */
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: all 0.3s ease; /* Smooth transitions for hover and lift */
+  }
+  
+  .date-range-form button:hover {
+    background: linear-gradient(145deg, #58bd89, #88d4b0); /* Slightly darker gradient */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  }
+  
+  .date-range-form button:active {
+    transform: translateY(0); /* Reset lift on click */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on click */
+  }
+  
+  
+  .chart-wrapper {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%; /* Ensures the chart fits inside its container */
+    overflow-x: auto; 
+    height: 400px;
+  }
+  
+  .chart-wrapper canvas {
+    max-width: 100%; /* Ensures the canvas scales within the parent */
+    height: auto; /* Keeps the aspect ratio intact */
+  }
+  
+  .loading-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #007bff;
+  }
+  
+  @media (min-width: 768px) {
+    .date-range-form .filter-card{
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+    }
+  }

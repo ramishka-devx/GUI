@@ -65,6 +65,16 @@
   font-size: 0.9rem;
 }
 
+.action-cell-container{
+
+}
+.action-cell{
+  display: flex;
+  flex-direction: row;
+  column-gap: 11px;
+  align-items: baseline;
+  justify-content: center;
+}
 /* Add media query for responsiveness */
 @media (max-width: 768px) {
   .foods-table,

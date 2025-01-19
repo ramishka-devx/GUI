@@ -1,0 +1,20 @@
+.loading-banner {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the banner */
+    background-color: rgba(238, 229, 103, 1);
+    color: rgba(34, 33, 17, 0.8);
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 0.88rem;
+    z-index: 9999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 13px;
+    width: fit-content;
+  }
+  
+  .loading-banner p {
+    margin: 0;
+  }
+  

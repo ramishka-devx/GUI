@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+const baseURL = process.env.REACT_APP_API_BASE_URL;
+
 
 const CategorySelect = ({ canteenId, onCategoryChange }) => {
   const [categories, setCategories] = useState([]);
@@ -14,7 +16,7 @@ const CategorySelect = ({ canteenId, onCategoryChange }) => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5369/admin/categories?canteenId=${canteenId}`
+        `${baseURL}/admin/categories?canteenId=${canteenId}`
       );
       setCategories(response.data);
     } catch (error) {
