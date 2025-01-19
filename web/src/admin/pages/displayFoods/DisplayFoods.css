@@ -1,0 +1,43 @@
+.foods-table-container {
+    margin: 20px auto;
+    max-width: 80%;
+    text-align: center;
+  }
+
+  .add-food-button-container{
+    /* border: 1px solid #dd1212; */
+    float: right;
+    margin: 15px 0;
+  }
+  .add-food-button{
+    background: #35d420;
+    color: white;
+    padding: 8px;
+
+  }
+  
+  .foods-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .foods-table th,
+  .foods-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .foods-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .foods-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .foods-table img {
+    border-radius: 5px;
+  }
+  

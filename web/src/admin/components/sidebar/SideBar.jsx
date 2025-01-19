@@ -6,10 +6,10 @@ const Sidebar = () => {
     <aside className="sidebar">
       <ul className="menu">
         <li className="menu-item">
-          <a href="#" className="menu-link">Dashboard</a>
+          <a href="/admin" className="menu-link">Dashboard</a>
         </li>
         <li className="menu-item">
-          <a href="#" className="menu-link">Kanban</a>
+          <a href="orders" className="menu-link">Orders</a>
         </li>
       </ul>
     </aside>
