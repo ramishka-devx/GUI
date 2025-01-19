@@ -99,6 +99,15 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
+.no-orders-row{
+  text-align: center;
+  font-size: 0.9rem;
+  color: #07070791;
+}
+.no-orders-column{
+  text-align: center;
+}
+
 td div {
   margin-bottom: 5px;
   font-size: 0.9rem;

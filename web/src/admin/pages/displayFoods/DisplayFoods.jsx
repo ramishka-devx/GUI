@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './DisplayFoods.css'
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import "./DisplayFoods.css";
 import { Link } from "react-router-dom";
 
 const DisplayFoods = () => {
-    const [canteenId, setCanteenId] = useState(localStorage.getItem("canteenId"));
+  const [canteenId] = useState(localStorage.getItem("canteenId"));
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-
 
   const fetchFoods = async () => {
     try {
@@ -24,11 +24,44 @@ const DisplayFoods = () => {
     }
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     fetchFoods();
-  },[])
+  }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="foods-table-container">
+        <h2>Loading Foods...</h2>
+        <div className="skeleton-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Food ID</th>
+                <th>Category</th>
+                <th>Food Title</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Availability</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...Array(5)].map((_, index) => (
+                <tr key={index}>
+                  {[...Array(7)].map((_, cellIndex) => (
+                    <td key={cellIndex}>
+                      <Skeleton height={30} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
   if (error) return <p>{error}</p>;
 
   return (
@@ -36,7 +69,7 @@ const DisplayFoods = () => {
       <h2>Foods in Canteen {canteenId}</h2>
       <div className="add-food-button-container">
         <button className="add-food-button">
-            <Link to="/admin/foods/add">Add New</Link>
+          <Link to="/admin/foods/add">Add New</Link>
         </button>
       </div>
       <table className="foods-table">

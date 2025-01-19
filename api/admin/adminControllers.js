@@ -2,16 +2,17 @@ const db = require('../config/db');
 
 const getOrdersAdmin = async (req, res) => {
     try {
-        const { selectedDate, search } = req.query;
+        const { selectedDate, search, canteenId } = req.query;
 
         // Validate if the selectedDate is provided
-        if (!selectedDate) {
+        if (!selectedDate || !canteenId) {
             return res.status(400).json({ success: false, message: 'Please provide a valid date.' });
         }
 
         // Build query dynamically based on search parameter
         let searchQuery = '';
         const queryParams = [selectedDate];
+        queryParams.push(canteenId);
 
         if (search) {
             searchQuery = `
@@ -40,7 +41,7 @@ const getOrdersAdmin = async (req, res) => {
                 o.updated_at
             FROM orders o
             JOIN users u ON o.userId = u.userId
-            WHERE DATE(o.date) = ?
+            WHERE DATE(o.date) = ? AND o.canteenId = ?
             ${searchQuery}
             `,
             queryParams

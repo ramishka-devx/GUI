@@ -3,14 +3,14 @@ import axios from 'axios';
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
 
-export const fetchOrdersByDate = async (selectedDate) => {
+export const fetchOrdersByDate = async (selectedDate, search, canteenId) => {
     if (!selectedDate) {
       throw new Error("Please select a date.");
     }
   
     try {
       const response = await fetch(
-        `${baseURL}/admin/orders?selectedDate=${selectedDate}`,
+        `${baseURL}/admin/orders?selectedDate=${selectedDate}&search=${search}&canteenId=${canteenId}`,
         { method: "POST" }
       );
       const result = await response.json();

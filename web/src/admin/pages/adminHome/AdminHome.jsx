@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import SeeOrders from '../orders/SeeOrders'
 import AddFood from '../newFood/NewFood'
 import DisplayFoods from '../displayFoods/DisplayFoods'
+import DashBoard from '../dashboard/DashBoard'
 
 const AdminHome = () => {
   return (
@@ -12,6 +13,7 @@ const AdminHome = () => {
         <AdminNavBar />
       
         <Routes>
+          <Route path="/admin/" element={<DashBoard />} />
           <Route path="/admin/orders" element={<SeeOrders />} />
           <Route path="/admin/foods/" element={<DisplayFoods />} />
           <Route path="/admin/foods/add" element={<AddFood />} />

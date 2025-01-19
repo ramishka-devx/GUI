@@ -1,43 +1,111 @@
+/* Container styling */
 .foods-table-container {
-    margin: 20px auto;
-    max-width: 80%;
+  margin: 20px auto;
+  max-width: 90%;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* Table styling */
+.foods-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.foods-table th,
+.foods-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.foods-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.foods-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.foods-table img {
+  border-radius: 5px;
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: cover;
+}
+
+/* Skeleton table */
+.skeleton-table {
+  width: 100%;
+}
+
+.skeleton-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skeleton-table th,
+.skeleton-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.add-food-button-container{
+  /* border: 1px solid #dd1212; */
+  float: right;
+  margin: 15px 0;
+}
+.add-food-button{
+  color: white;   
+  background: #32c045;
+  padding: 8px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* Add media query for responsiveness */
+@media (max-width: 768px) {
+  .foods-table,
+  .skeleton-table table {
+    font-size: 12px;
+  }
+
+  .foods-table th,
+  .foods-table td {
+    padding: 6px;
+  }
+
+  .foods-table img {
+    max-width: 40px;
+    max-height: 40px;
+  }
+
+  .add-food-button-container {
     text-align: center;
   }
 
-  .add-food-button-container{
-    /* border: 1px solid #dd1212; */
-    float: right;
-    margin: 15px 0;
-  }
-  .add-food-button{
-    background: #35d420;
-    color: white;
-    padding: 8px;
-
-  }
-  
-  .foods-table {
+  .add-food-button {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    margin-bottom: 10px;
   }
-  
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+  .foods-table,
+  .skeleton-table table {
+    font-size: 10px;
+  }
+
+  .foods-table img {
+    max-width: 30px;
+    max-height: 30px;
+  }
+
   .foods-table th,
   .foods-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 4px;
   }
-  
-  .foods-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-  }
-  
-  .foods-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .foods-table img {
-    border-radius: 5px;
-  }
-  
+}

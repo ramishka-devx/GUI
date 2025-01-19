@@ -5,6 +5,7 @@ import "./SeeOrder.css";
 import { fetchOrdersByDate, updateOrderStatus } from "../../api/adminAPI";
 
 const SeeOrders = () => {
+  const [canteenId, setCanteenId] = useState(localStorage.getItem("canteenId"));
   const [selectedDate, setSelectedDate] = useState(() => {
     const today = new Date();
     return today.toISOString().split("T")[0]; // Format today's date as YYYY-MM-DD
@@ -16,7 +17,7 @@ const SeeOrders = () => {
   const fetchOrders = async () => {
     setIsLoading(true);
     try {
-      const fetchedOrders = await fetchOrdersByDate(selectedDate, search);
+      const fetchedOrders = await fetchOrdersByDate(selectedDate, search, canteenId);
       setOrders(fetchedOrders);
     } catch (error) {
       alert(error.message);
@@ -100,6 +101,9 @@ const SeeOrders = () => {
                   <td>
                     <Skeleton width={100} />
                   </td>
+                  <td>
+                    <Skeleton width={100} />
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -164,8 +168,8 @@ const SeeOrders = () => {
                   </tr>
                 ))
               ) : (
-                <tr>
-                  <td colSpan="6">No orders found.</td>
+                <tr className="no-orders-row">
+                  <td colSpan="7" className="no-orders-column">No orders found.</td>
                 </tr>
               )}
             </tbody>
