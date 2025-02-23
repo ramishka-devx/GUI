@@ -16,16 +16,25 @@ const Login = ({setIsLoggedIn}) => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await loginUser(data);
-      toast.success(response.data.message);
-      localStorage.setItem('token', response.data.token);
-      console.log('Token:', response.data.token); 
-      setIsLoggedIn(true);
-      navigate("/")// Store the token as needed
+        const response = await loginUser(data);
+        toast.success(response.data.message);
+        localStorage.setItem('token', response.data.token);
+        setIsLoggedIn(true);
+
+        if (response?.data?.type === 'admin') {
+            localStorage.setItem("canteenId", response.data.canteenId);
+            navigate("/admin");
+        }else{
+          navigate("/");
+        }
+
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Something went wrong');
+        const errorMessage = error.response?.data?.message || 'Something went wrong';
+        toast.error(errorMessage);
+        console.error('Error:', errorMessage);
     }
-  };
+};
+
 
   return (
     <div className="flex items-center justify-center min-h-screen ">

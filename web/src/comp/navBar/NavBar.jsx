@@ -21,6 +21,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
   const handleSignOut = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("token");
+    localStorage.removeItem("canteenId");
     navigate("/login");
   };
 

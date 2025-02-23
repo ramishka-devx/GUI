@@ -11,6 +11,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false); // Loading state
   const [message, setMessage] = useState(""); // For success/error messages
+  const canteenId = localStorage.getItem("OrderCanteenId");
   const navigate = useNavigate();
   // Load cart from local storage on page load
   useEffect(() => {
@@ -60,7 +61,7 @@ const Cart = () => {
 
       const response = await axios.post(
         `${baseURL}/orders/create`, // Replace with your API endpoint
-        { items: cart },
+        { items: cart, canteenId: canteenId },
         {
           headers: {
             Authorization: `${token}`,

@@ -3,9 +3,7 @@ const db = require("../config/db"); // Replace with the path to your database co
 const dailyOrdersGraph = async (req, res) => {
   try {
     // Get date range from query parameters
-    const { startDate, endDate } = req.query;
-
-    // Validate that both startDate and endDate are provided
+    const { startDate, endDate, canteenId } = req.query;
     if (!startDate || !endDate) {
       return res.status(400).json({ error: "Start date and end date are required." });
     }
@@ -17,14 +15,15 @@ const dailyOrdersGraph = async (req, res) => {
         COUNT(date) AS total_orders,
         SUM(total_price) AS total_revenue
       FROM orders
-      WHERE date BETWEEN ? AND ?
+      WHERE date BETWEEN ? AND ? AND canteenId = ?
       GROUP BY DATE(date)
       ORDER BY DATE(date) ASC;
     `;
 
     // Execute the query with the provided date range
-    const results = await db.query(query, [startDate, endDate]);
+    const results = await db.query(query, [startDate, endDate, canteenId]);
 
+    console.log(results);
     // Format the response
     const graphData = results.map((row) => ({
       date: row.date,
@@ -41,6 +40,7 @@ const dailyOrdersGraph = async (req, res) => {
 
 const getTodaySummary = async (req, res) => {
   try {
+    const canteenId = req.query.canteenId;
     const query = `
       SELECT 
         COUNT(orderId) AS total_orders,
@@ -48,11 +48,11 @@ const getTodaySummary = async (req, res) => {
         SUM(CASE WHEN order_status = 'pending' THEN 1 ELSE 0 END) AS pending_orders,
         SUM(CASE WHEN order_status = 'completed' THEN 1 ELSE 0 END) AS completed_orders
       FROM orders
-      WHERE DATE(date) = CURDATE();
+      WHERE DATE(date) = CURDATE() AND canteenId = ?;
     `;
 
     // Execute the query
-    const [results] = await db.query(query);
+    const [results] = await db.query(query, [canteenId]);
     console.log(results)
 
     // Response format

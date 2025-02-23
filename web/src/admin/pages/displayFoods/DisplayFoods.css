@@ -4,13 +4,28 @@
   max-width: 90%;
   text-align: center;
   overflow-x: auto;
+  color: #07070791;
+
 }
 
-/* Table styling */
+.foods-table-container  h1 {
+    text-align: center;
+    color: #07070791;
+    font-style: italic;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+/* Table styling with border radius */
 .foods-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Change from collapse to separate for border radius */
+  border-spacing: 0; /* Ensure there are no gaps between cells */
   margin-top: 20px;
+  border-radius: 8px; /* Add border radius */
+  overflow: hidden; /* Ensure content inside respects the border radius */
+  font-size: 0.8rem;
+
 }
 
 .foods-table th,
@@ -21,7 +36,8 @@
 }
 
 .foods-table th {
-  background-color: #007bff;
+  background-color: #55a4f8;
+  padding: 12px 8px;
   color: white;
 }
 
@@ -43,38 +59,71 @@
 
 .skeleton-table table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Ensure border radius compatibility */
+  border-spacing: 0;
+  border-radius: 10px; /* Add border radius */
+  overflow: hidden; /* Ensure content inside respects the border radius */
 }
 
 .skeleton-table th,
 .skeleton-table td {
-  padding: 10px;
+  padding: 12px 8px;
   text-align: left;
 }
 
-.add-food-button-container{
-  /* border: 1px solid #dd1212; */
+.add-food-button-container {
   float: right;
   margin: 15px 0;
 }
-.add-food-button{
-  color: white;   
-  background: #32c045;
+
+.add-food-button {
+  color: white;
+  background: #72BF78;
   padding: 8px 10px;
   border-radius: 5px;
   font-size: 0.9rem;
 }
 
-.action-cell-container{
+.action-cell-container {}
 
-}
-.action-cell{
+.action-cell {
   display: flex;
   flex-direction: row;
   column-gap: 11px;
   align-items: baseline;
   justify-content: center;
 }
+.badge-cell-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.badge-cell{
+  border: red 1px solid;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  width: fit-content;
+}
+
+.badge-inactive {
+  background-color: #ffe082;
+  color: #8d6e63;
+}
+
+.badge-active {
+  background-color: #81c784;
+  color: #fff;
+}
+
 /* Add media query for responsiveness */
 @media (max-width: 768px) {
   .foods-table,

@@ -25,8 +25,10 @@ const DailyOrdersGraph = ({setIsLoading}) => {
         return;
       }
 
+      const canteenId = localStorage.getItem("canteenId");
+
       const response = await fetch(
-        `${baseURL}/admin/dashboard/graph/dailyorders?startDate=${startDate}&endDate=${endDate}`
+        `${baseURL}/admin/dashboard/graph/dailyorders?startDate=${startDate}&endDate=${endDate}&canteenId=${canteenId}`
       );
       const data = await response.json();
       setGraphData(data);

@@ -14,7 +14,7 @@ const SummaryCards = ({ setIsLoading }) => {
     setIsLoading(true);
     const fetchSummary = async () => {
       try {
-        const response = await fetch(`${baseURL}/admin/dashboard/orders`);
+        const response = await fetch(`${baseURL}/admin/dashboard/orders?canteenId=${localStorage.getItem("canteenId")}`);
         const data = await response.json();
         setSummary(data);
       } catch (error) {

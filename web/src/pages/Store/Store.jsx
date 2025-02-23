@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { fetchCanteens, fetchCategories, fetchFoods } from "../../api/storeAPI";
 import "./Store.css";
 
-const Orders = ({setCartItemCounter}) => {
+const Orders = ({ setCartItemCounter }) => {
   const [canteens, setCanteens] = useState([]);
   const [categories, setCategories] = useState([]);
   const [foods, setFoods] = useState([]);
@@ -16,6 +16,9 @@ const Orders = ({setCartItemCounter}) => {
   const [loadingFoods, setLoadingFoods] = useState(false);
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const [totalPages, setTotalPages] = useState(1); // Total pages from the API
+  const [storedCanteenId, setStoredCanteenId] = useState(
+    localStorage.getItem("OrderCanteenId")
+  );
 
   // Load cart from local storage on page load
   useEffect(() => {
@@ -83,11 +86,23 @@ const Orders = ({setCartItemCounter}) => {
     }
   }, [selectedCategory, currentPage]);
 
+  // Clear cart when selectedCanteen changes
+  useEffect(() => {
+    if (selectedCanteen && selectedCanteen !== storedCanteenId) {
+      // Clear cart and update stored canteen ID
+      localStorage.removeItem("cart");
+      setCart([]);
+      localStorage.setItem("OrderCanteenId", selectedCanteen);
+      setStoredCanteenId(selectedCanteen);
+    }
+  }, [selectedCanteen, storedCanteenId]);
+
   // Add item to cart
   const addToCart = (food, quantity) => {
     // Check if item already exists in the cart
+
     const existingItem = cart.find((item) => item.foodId === food.foodId);
-  
+
     if (existingItem) {
       // If item exists, update the quantity
       const updatedCart = cart.map((item) =>
@@ -109,9 +124,6 @@ const Orders = ({setCartItemCounter}) => {
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
-  
-
-
 
   // Remove item from cart
   const removeFromCart = (foodId) => {
@@ -132,6 +144,7 @@ const Orders = ({setCartItemCounter}) => {
       setCurrentPage(page);
     }
   };
+  console.log(foods);
 
   return (
     <div className="orders-container">
@@ -155,23 +168,26 @@ const Orders = ({setCartItemCounter}) => {
         </div>
 
         <div className="category-scroll">
-          {loadingCategories ? (
-            [1, 2, 3].map((_, index) => (
-              <Skeleton key={index} height={40} width={100} style={{ marginRight: "10px" }} />
-            ))
-          ) : (
-            categories.map((category) => (
-              <button
-                key={category.categoryId}
-                className={`category-btn ${
-                  selectedCategory === category.categoryId ? "active" : ""
-                }`}
-                onClick={() => setSelectedCategory(category.categoryId)}
-              >
-                {category.title}
-              </button>
-            ))
-          )}
+          {loadingCategories
+            ? [1, 2, 3].map((_, index) => (
+                <Skeleton
+                  key={index}
+                  height={40}
+                  width={100}
+                  style={{ marginRight: "10px" }}
+                />
+              ))
+            : categories.map((category) => (
+                <button
+                  key={category.categoryId}
+                  className={`category-btn ${
+                    selectedCategory === category.categoryId ? "active" : ""
+                  }`}
+                  onClick={() => setSelectedCategory(category.categoryId)}
+                >
+                  {category.title}
+                </button>
+              ))}
         </div>
       </div>
 
@@ -181,7 +197,11 @@ const Orders = ({setCartItemCounter}) => {
             {[1, 2, 3].map((_, index) => (
               <div key={index} className="food-card">
                 <Skeleton height={150} width="100%" />
-                <Skeleton height={20} width="60%" style={{ margin: "10px auto" }} />
+                <Skeleton
+                  height={20}
+                  width="60%"
+                  style={{ margin: "10px auto" }}
+                />
                 <Skeleton height={20} width="40%" />
               </div>
             ))}
@@ -191,7 +211,11 @@ const Orders = ({setCartItemCounter}) => {
             <div className="food-items">
               {foods.map((food) => (
                 <div key={food.foodId} className="food-card">
-                  <img src={food.image_url} alt={food.title} className="food-image" />
+                  <img
+                    src={food.image_url}
+                    alt={food.title}
+                    className="food-image"
+                  />
                   <div className="food-details">
                     <h4>{food.title}</h4>
                     <p className="food-price">LKR {food.price.toFixed(2)}</p>
@@ -219,7 +243,9 @@ const Orders = ({setCartItemCounter}) => {
                             addToCart(
                               food,
                               Number(
-                                document.getElementById(`quantity-${food.foodId}`).value
+                                document.getElementById(
+                                  `quantity-${food.foodId}`
+                                ).value
                               )
                             )
                           }

@@ -18,7 +18,6 @@ const DisplayFoods = () => {
   const [loadingBanner, setLoadingBanner] = useState(false);
   const [error, setError] = useState("");
 
-  
   const fetchFoods = async () => {
     try {
       const response = await axios.get(
@@ -37,14 +36,14 @@ const DisplayFoods = () => {
   }, []);
 
   const handleUpdateStatus = async (orderId, status) => {
-    setLoadingBanner(true)
+    setLoadingBanner(true);
     try {
       await updatefoodStatus(orderId, status);
       fetchFoods();
     } catch (error) {
       alert(error.message);
-    }finally{
-      setLoadingBanner(false)
+    } finally {
+      setLoadingBanner(false);
     }
   };
 
@@ -86,11 +85,10 @@ const DisplayFoods = () => {
 
   return (
     <div className="foods-table-container">
+      {loadingBanner && <LoadingBanner />}
 
-    {loadingBanner && <LoadingBanner />}
- 
-
-      <h2>Foods in Canteen {canteenId}</h2>
+      <h1>Foods Managment</h1>
+      <hr />
       <div className="add-food-button-container">
         <button className="add-food-button">
           <Link to="/admin/foods/add">Add New</Link>
@@ -116,7 +114,17 @@ const DisplayFoods = () => {
               <td>{food.categoryTitle}</td>
               <td>{food.foodTitle}</td>
               <td>LKR {food.price.toFixed(2)}</td>
-              <td>{food.status === 1 ? "Active" : "Inactive"}</td>
+              <td className="badge-cell-container">
+                <div className="badge-cell">
+                  <button
+                    className={`badge ${
+                      food.status === 1 ? "badge-active" : "badge-inactive"
+                    }`}
+                  >
+                    {food.status === 1 ? "Active" : "Inactive"}
+                  </button>
+                </div>
+              </td>
               <td>{food.availability === 1 ? "Available" : "Unavailable"}</td>
               <td>
                 <img
@@ -130,21 +138,21 @@ const DisplayFoods = () => {
                   <Link to={`/admin/foods/edit/${food.foodId}`}>
                     {" "}
                     <button>
-                      <MdEdit color="Green" size={25} />
+                      <MdEdit color="#72BF78" size={20} />
                     </button>{" "}
                   </Link>
                   <button>
                     {food.status === 1 ? (
                       <MdOutlineDeleteOutline
                         onClick={() => handleUpdateStatus(food.foodId, 0)} // Wrap in arrow function
-                        color="red"
-                        size={25}
+                        color="#F93827"
+                        size={20}
                       />
                     ) : (
                       <GrPowerCycle
                         onClick={() => handleUpdateStatus(food.foodId, 1)} // Wrap in arrow function
-                        color="blue"
-                        size={25}
+                        color="#2973B2"
+                        size={20}
                       />
                     )}
                   </button>

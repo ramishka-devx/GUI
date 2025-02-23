@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../config/db");
 
 const placeOrder = async (req, res) => {
-  const { items } = req.body;
+  const { items,canteenId } = req.body;
 
   // Get the userId from the JWT token
   const token = req.headers["authorization"];
@@ -29,10 +29,10 @@ const placeOrder = async (req, res) => {
 
     // Insert into 'orders' table
     const orderQuery = `
-      INSERT INTO orders (userId, total_price)
-      VALUES (?, ?)
+      INSERT INTO orders (userId, total_price,canteenId)
+      VALUES (?, ?,?)
     `;
-    const orderResult = await db.query(orderQuery, [userId, totalPrice]);
+    const orderResult = await db.query(orderQuery, [userId, totalPrice, canteenId]);
     const orderId = orderResult.insertId;
 
     // Insert each item into 'orderItems' table

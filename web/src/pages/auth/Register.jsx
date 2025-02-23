@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Register = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -13,12 +14,19 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await registerUser(data);
-      toast.success(response.data.message);
+        const response = await registerUser(data);
+        toast.success(response.data.message || 'User registered successfully');
+        navigate('/login');
     } catch (error) {
-      toast.error(error.response?.data?.errors[0]?.message || 'Something went wrong');
+        // Safely check for both possible error formats
+        const errorMessage = error.response?.data?.errors?.[0]?.message 
+                             || error.response?.data?.message 
+                             || 'Something went wrong';
+        toast.error(errorMessage);
+        console.error('Error:', errorMessage);
     }
-  };
+};
+
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
