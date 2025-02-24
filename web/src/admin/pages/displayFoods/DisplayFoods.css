@@ -1,6 +1,7 @@
 /* Container styling */
 .foods-table-container {
   margin: 20px auto;
+  padding: 20px;
   max-width: 90%;
   text-align: center;
   overflow-x: auto;
@@ -31,7 +32,7 @@
 .foods-table th,
 .foods-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 2px 8px;
   text-align: left;
 }
 
@@ -67,7 +68,7 @@
 
 .skeleton-table th,
 .skeleton-table td {
-  padding: 12px 8px;
+  padding: 5px 8px;
   text-align: left;
 }
 
@@ -94,14 +95,13 @@
   justify-content: center;
 }
 .badge-cell-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
 }
 
 .badge-cell{
-  border: red 1px solid;
+  /* border: red 1px solid;   */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .badge {

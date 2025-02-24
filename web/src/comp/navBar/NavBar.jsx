@@ -25,21 +25,29 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
     navigate("/login");
   };
 
+  console.log("log"+isLoggedIn);
   return (
     <nav className="navbar">
       <div className="navbar-container">
         {/* Logo */}
         <a href="/" className="navbar-logo">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            alt="Kalderama"
-            className="navbar-logo-img"
-          />
-          <span className="navbar-logo-text">Kalderama</span>
+
+          <span className="navbar-logo-text">YzŠ»nŠyv</span>
         </a>
 
         {/* profile */}
         <div className="navbar-actions hidden">
+
+        {!isLoggedIn && (
+            <div className="auth-box">
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+              {/* <Link to="/register">
+                <button>Register</button>
+              </Link> */}
+            </div>
+          )}
 
           <button className="cart-btn">
             <Link to="/cart">
@@ -47,7 +55,11 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
               <span className="cart-badge">{cartItemCounter}</span>
             </Link>
           </button>
-          <ProfileDropdown handleSignOut={handleSignOut} />
+          {
+            isLoggedIn && (<ProfileDropdown handleSignOut={handleSignOut} />)
+          }
+          
+          
         </div>
 
         {/* Navbar Menu */}
@@ -74,16 +86,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
               <a href="#">Contact</a>
             </li>
           </ul>
-          {!isLoggedIn && (
-            <div className="auth-box">
-              <Link to="/login">
-                <button>Login</button>
-              </Link>
-              <Link to="/register">
-                <button>Register</button>
-              </Link>
-            </div>
-          )}
+        
         </div>
       </div>
     </nav>

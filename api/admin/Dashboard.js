@@ -1,4 +1,5 @@
 const db = require("../config/db"); // Replace with the path to your database connection file
+const createHttpError = require("http-errors");
 
 const dailyOrdersGraph = async (req, res) => {
   try {
@@ -70,7 +71,34 @@ const getTodaySummary = async (req, res) => {
   }
 };
 
-module.exports = getTodaySummary;
+const getFoodItemSales = async (req, res) => {
+  try {
+    const canteenId = req.query.canteenId;
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+
+    console.log("Start Date:", startDate, "End Date:", endDate, "Canteen ID:", canteenId);
+
+    const query = `
+SELECT 
+    foods.title AS foodItemName,
+    SUM(orderItems.quantity) AS total_sold
+FROM orderItems
+INNER JOIN orders ON orders.orderId = orderItems.orderId
+INNER JOIN foods ON foods.foodId = orderItems.foodId
+WHERE DATE(orders.date) BETWEEN ? AND ? AND canteenId = ?
+GROUP BY foods.title;
+
+    `;
+    db.query(query, [startDate, endDate, canteenId],(err,results)=>{
+      if(err) return next(createHttpError.InternalServerError());
+      res.json(results);
+    })
+  } catch (error) {
+    console.error("Error fetching food item sales:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 
-module.exports = {dailyOrdersGraph, getTodaySummary};
+module.exports = {dailyOrdersGraph, getTodaySummary, getFoodItemSales};

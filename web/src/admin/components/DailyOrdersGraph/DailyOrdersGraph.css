@@ -78,7 +78,7 @@
   
   
   .chart-wrapper {
-    margin-top: 20px;
+    margin-top: 10px;
     background: #fff;
     border-radius: 10px;
     padding: 20px;
@@ -87,6 +87,10 @@
     max-width: 100%; /* Ensures the chart fits inside its container */
     overflow-x: auto; 
     height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   .chart-wrapper canvas {
@@ -99,11 +103,46 @@
     font-size: 1.2rem;
     color: #007bff;
   }
+
   
+  /* desktop */
   @media (min-width: 768px) {
-    .date-range-form .filter-card{
-        display: flex;
-        gap: 10px;
-        align-items: baseline;
+    .graph-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+        "header date-range"
+        "line-chart pie-chart";
+      gap: 10px 20px;
+      padding: 20px;
     }
+    
+    .graph-container h2 {
+      grid-area: header;
+      /* border: red solid 1px; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .date-range-form {
+      grid-area: date-range;
+    }
+    
+    .line-chart {
+      grid-area: line-chart;
+    }
+    
+    .pie-chart {
+      grid-area: pie-chart;
+    }
+    .date-range-form{
+      /* border: red solid 1px; */
+      justify-content: right;
+    }
+    .date-range-form label {
+      display: none;
+      float: right;
+    }
+    
   }

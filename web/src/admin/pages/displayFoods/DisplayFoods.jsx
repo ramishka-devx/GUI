@@ -102,7 +102,7 @@ const DisplayFoods = () => {
             <th>Food Title</th>
             <th>Price</th>
             <th>Status</th>
-            <th>Availability</th>
+            {/* <th>Availability</th>  */}
             <th>Image</th>
             <th>actions</th>
           </tr>
@@ -125,7 +125,7 @@ const DisplayFoods = () => {
                   </button>
                 </div>
               </td>
-              <td>{food.availability === 1 ? "Available" : "Unavailable"}</td>
+              {/* <td>{food.availability === 1 ? "Available" : "Unavailable"}</td> */}
               <td>
                 <img
                   src={food.image_url}
@@ -141,6 +141,7 @@ const DisplayFoods = () => {
                       <MdEdit color="#72BF78" size={20} />
                     </button>{" "}
                   </Link>
+
                   <button>
                     {food.status === 1 ? (
                       <MdOutlineDeleteOutline

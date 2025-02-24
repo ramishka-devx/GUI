@@ -92,6 +92,7 @@ const Orders = ({ setCartItemCounter }) => {
       // Clear cart and update stored canteen ID
       localStorage.removeItem("cart");
       setCart([]);
+      setCartItemCounter(0);
       localStorage.setItem("OrderCanteenId", selectedCanteen);
       setStoredCanteenId(selectedCanteen);
     }

@@ -1,7 +1,7 @@
 /* Base styles */
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
   }
   
   .navbar {
@@ -12,6 +12,7 @@ body {
     padding: 10px 20px;
     position: relative;
     z-index: 10;
+    border: 1px solid red;
   }
   
   .navbar-container {
@@ -36,9 +37,10 @@ body {
   }
   
   .navbar-logo-text {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #111827;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #24304b;
+    font-family: Disapamok ;
   }
   
   /* Navbar menu */
@@ -71,8 +73,8 @@ body {
   }
   
   .navbar-menu li a.active {
-    background-color: #1d4ed8;
-    color: #ffffff;
+    color: #1d4ed8;
+    font-weight: 500;
   }
   
   .navbar-menu li a:hover {
@@ -122,7 +124,7 @@ body {
 }
 
 
-  .navbar-menu .auth-box{
+ .auth-box{
     display: flex;
     align-items: center;
     order: 3;
@@ -130,16 +132,16 @@ body {
     /* border: 1px solid red; */
   }
 
-  .navbar-menu .auth-box button:nth-child(1){
-    background-color: #1d4ed8;
+ .auth-box button:nth-child(1){
+    background-color: #0B8AD9;
     color: #ffffff;
     border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 8px 35px;
+    border-radius: 9px;
     cursor: pointer;
   }
   
-  .navbar-menu .auth-box button:nth-child(2){
+ .auth-box button:nth-child(2){
     background-color: #b8c9f8;
     color: #1d4ed8;
     border: none;

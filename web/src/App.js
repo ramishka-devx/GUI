@@ -17,6 +17,12 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartItemCounter, setCartItemCounter] = useState(0);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  },[]);
   // set cart count at initial render
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];

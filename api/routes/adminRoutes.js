@@ -3,7 +3,7 @@ const { getOrdersAdmin, updateOrderStatus } = require('../admin/adminControllers
 const multer = require("multer");
 const { addFood, getAllFoodsInCanteen, getSingleFood, updateFoodDetails, updateFoodStatus } = require('../admin/manageFoods');
 const { getCategories } = require('../admin/manageCategories');
-const {dailyOrdersGraph, getTodaySummary} = require('../admin/Dashboard');
+const {dailyOrdersGraph, getTodaySummary, getFoodItemSales} = require('../admin/Dashboard');
 const router = express.Router();
 
 const storage = multer.memoryStorage();
@@ -25,5 +25,7 @@ router.get("/categories", getCategories);
 //dashboard
 router.get("/dashboard/graph/dailyorders" , dailyOrdersGraph)
 router.get("/dashboard/orders" , getTodaySummary)
+router.get("/dashboard/foods" , getFoodItemSales)
+
 
 module.exports = router;
