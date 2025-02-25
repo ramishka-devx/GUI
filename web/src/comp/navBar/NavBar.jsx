@@ -4,15 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ProfileDropdown from "../../admin/components/ProfileDropDown/ProfileDropDown";
+import { RiMenu3Line } from "react-icons/ri";
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter, setIsSideNavOpen, isSideNavOpen }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
 
   const toggleProfile = () => {
     setProfileOpen(!profileOpen);
@@ -25,71 +22,62 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter }) => {
     navigate("/login");
   };
 
-  console.log("log"+isLoggedIn);
+  const toggleNav = () => {
+    setIsSideNavOpen(!isSideNavOpen);
+  };
+
+  console.log("log" + isLoggedIn);
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* Logo */}
-        <a href="/" className="navbar-logo">
-
+    <div className="navbar">
+      <div className="logo-container">
+        <Link to={"/"}>
           <span className="navbar-logo-text">YzŠ»nŠyv</span>
-        </a>
+        </Link>
+      </div>
 
-        {/* profile */}
-        <div className="navbar-actions hidden">
+      <div className="menu-container">
+        <ul>
+          <li>
+            <Link to="/" className="active">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/store">Order</Link>
+          </li>
+          <li>
+            <Link to="/pricing">Pricing</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className="personal-container">
+        <button className="cart-btn">
+          <Link to="/cart">
+            <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
+            <span className="cart-badge">{cartItemCounter}</span>
+          </Link>
+        </button>
+        {isLoggedIn && <ProfileDropdown handleSignOut={handleSignOut} />}
 
         {!isLoggedIn && (
-            <div className="auth-box">
-              <Link to="/login">
-                <button>Login</button>
-              </Link>
-              {/* <Link to="/register">
-                <button>Register</button>
-              </Link> */}
-            </div>
-          )}
-
-          <button className="cart-btn">
-            <Link to="/cart">
-              <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
-              <span className="cart-badge">{cartItemCounter}</span>
+          <div className="auth-box">
+            <Link to="/login">
+              <button>Login</button>
             </Link>
-          </button>
-          {
-            isLoggedIn && (<ProfileDropdown handleSignOut={handleSignOut} />)
-          }
-          
-          
-        </div>
-
-        {/* Navbar Menu */}
-        <div
-          className={`navbar-menu ${menuOpen ? "active" : ""}`}
-          id="navbar-user"
-        >
-          <ul>
-            <li>
-              <a href="#" className="active">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="/store">Order</a>
-            </li>
-            <li>
-              <a href="#">Pricing</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-          </ul>
-        
+          </div>
+        )}
+        <div className="menu-icon">
+          <RiMenu3Line size={"25px"} onClick={toggleNav} />
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

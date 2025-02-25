@@ -10,8 +10,8 @@
   }
   
   .profile-photo {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     border: 2px solid #d1d5db; /* Adds a subtle border around the photo */
     transition: transform 0.2s, border-color 0.2s;

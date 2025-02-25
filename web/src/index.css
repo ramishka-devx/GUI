@@ -21,6 +21,11 @@ code {
     monospace;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --myBlue: #0B8AD9;
+  --background-color: #333;
+  --text-color: white;
+  --hover-color: #555;
+  --overlay-color: rgba(0, 0, 0, 0.5);
+}
+

@@ -12,10 +12,13 @@ import HeroSection from "./comp/Hero/Hero";
 import Cart from "./pages/cart/Cart";
 import ProfilePage from "./pages/profile/Profile";
 import AdminHome from "./admin/pages/adminHome/AdminHome";
+import SideNav from "./comp/sideNavBar/SideNavBar";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartItemCounter, setCartItemCounter] = useState(0);
+  const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -33,12 +36,13 @@ const App = () => {
     const location = useLocation();
     const isAdminRoute = location.pathname.startsWith("/admin");
 
-    return isAdminRoute ? <AdminHome /> : <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} cartItemCounter={cartItemCounter} />;
+    return isAdminRoute ? <AdminHome /> : <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} cartItemCounter={cartItemCounter} setIsSideNavOpen = {setIsSideNavOpen} isSideNavOpen = {isSideNavOpen} />;
   };
 
   return (
     <Router>
       <ShowNavbarOrAdmin />
+      <SideNav isSideNavOpen={isSideNavOpen} setIsSideNavOpen={setIsSideNavOpen} isLoggedIn = {isLoggedIn} />
       <Routes>
         <Route path="/" element={<HeroSection />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
