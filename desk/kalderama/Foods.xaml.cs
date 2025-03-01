@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Windows.Controls;
 using Newtonsoft.Json;
+using System.Windows;
 
 namespace kalderama
 {
@@ -49,8 +50,7 @@ namespace kalderama
             }
         }
 
-
-        private async void DeleteOrRestoreFood_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void DeleteOrRestoreFood_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.DataContext is Food food)
             {
@@ -104,7 +104,6 @@ namespace kalderama
             }
         }
 
-
         private async Task RestoreFoodStatus(int foodId)
         {
             using (var client = new HttpClient())
@@ -142,6 +141,23 @@ namespace kalderama
             }
         }
 
+        private void AddNewFood_Click(object sender, RoutedEventArgs e)
+        {
+            // Open the AddFoodWindow when the button is clicked
+            var addFoodWindow = new AddFoodWindow();
+            addFoodWindow.Show();
+        }
+
+        private void EditFood_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the selected food item from the DataGrid
+            if (sender is Button button && button.DataContext is Food selectedFood)
+            {
+                // Open the EditFoodWindow and pass the food ID for fetching the food data
+                var editFoodWindow = new EditFoodWindow(selectedFood.FoodId);
+                editFoodWindow.Show();
+            }
+        }
     }
 
     public class Food
@@ -150,17 +166,13 @@ namespace kalderama
         public string Category { get; set; }
         public string FoodTitle { get; set; }
         public decimal Price { get; set; }
-
-        // Format price as LKR
-        public string PriceFormatted => $"LKR {Price:F2}";
-
         public string StatusText => Status == 1 ? "ACTIVE" : "INACTIVE";
         public string StatusColor => Status == 1 ? "Green" : "Orange";
 
-        public string image_url { get; set; } // Use the property name exactly as in the API
+        // The property name should match the API response field
+        public string image_url { get; set; } // This should be lowercase to match the API response
 
         public int Status { get; set; }
-
         public string ButtonActionText { get; set; }
         public string ButtonActionColor { get; set; }
 
@@ -171,7 +183,4 @@ namespace kalderama
             ButtonActionColor = Status == 1 ? "Red" : "Green";
         }
     }
-
-
-
 }

@@ -7,6 +7,9 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
             <TextBlock Text="Food Management" FontSize="24" FontWeight="Bold" Foreground="Black" Margin="10" HorizontalAlignment="Center"/>
 
+            <!-- Add New Food Button -->
+            <Button Content="Add New Food" Width="150" Height="40" HorizontalAlignment="Right" Margin="10" Click="AddNewFood_Click"/>
+
             <!-- Foods Table -->
             <DataGrid Name="foodsGrid" AutoGenerateColumns="False" Height="300" Width="850" Margin="10" HeadersVisibility="Column" CanUserAddRows="False">
                 <DataGrid.Columns>
@@ -15,42 +18,33 @@
                     <DataGridTextColumn Header="FOOD TITLE" Binding="{Binding FoodTitle}" Width="200"/>
                     <DataGridTextColumn Header="PRICE" Binding="{Binding PriceFormatted}" Width="100"/>
 
-                    <!-- STATUS Column -->
                     <DataGridTemplateColumn Header="STATUS" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding StatusText}" 
-                       Background="{Binding StatusColor}" 
-                       Foreground="White" Padding="5" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding StatusText}" Background="{Binding StatusColor}" Foreground="White" Padding="5" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-
-                    <!-- IMAGE Column -->
                     <DataGridTemplateColumn Header="IMAGE" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <!-- Make sure the binding matches the property name "image_url" -->
                                 <Image Source="{Binding image_url}" Width="50" Height="50"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-
-
-
-                    <!-- ACTIONS Column (Delete or Restore Button) -->
                     <DataGridTemplateColumn Header="ACTIONS" Width="150">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding ButtonActionText}" 
-                                        Background="{Binding ButtonActionColor}" 
-                                        Foreground="White" Padding="5" 
-                                        Click="DeleteOrRestoreFood_Click"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Delete" Background="Red" Foreground="White" Padding="5" Click="DeleteOrRestoreFood_Click"/>
+                                    <Button Content="Edit" Background="Orange" Foreground="White" Padding="5" Margin="5,0,0,0" Click="EditFood_Click"/>
+                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

@@ -94,7 +94,7 @@ const getSingleFood = async (req, res) => {
     }
 
     // SQL query to fetch food details
-    const query = "SELECT * FROM foods WHERE foodId = ?";
+    const query = "SELECT * FROM foods WHERE foodId = ? ORDER BY foodId DESC";
     db.query(query, foodId, (err, results) => {
       if (err) return next(createHttpError.InternalServerError());
       if (results.length === 0) {

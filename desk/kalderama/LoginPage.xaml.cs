@@ -41,21 +41,54 @@ namespace kalderama
 
         private async Task<LoginResponse> LoginAsync(string identifier, string password)
         {
-            using (var client = new HttpClient())
+            try
             {
-                var url = $"{BaseUrl}/auth/login";
-                var data = new { identifier = identifier, password = password };
-                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync(url, content);
-                if (response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<LoginResponse>(jsonResponse);
+                    var url = $"{BaseUrl}/auth/login";
+                    var data = new { identifier = identifier, password = password };
+                    var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+                    // Make the POST request
+                    var response = await client.PostAsync(url, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await response.Content.ReadAsStringAsync();
+                        try
+                        {
+                            // Attempt to deserialize the response
+                            return JsonConvert.DeserializeObject<LoginResponse>(jsonResponse);
+                        }
+                        catch (JsonException ex)
+                        {
+                            // Log or handle JSON deserialization errors
+                            System.Windows.MessageBox.Show($"Error parsing response: {ex.Message}");
+                            return null;
+                        }
+                    }
+                    else
+                    {
+                        // Handle non-successful HTTP responses
+                        var errorMessage = await response.Content.ReadAsStringAsync();
+                        System.Windows.MessageBox.Show($"Login failed: {response.StatusCode} - {errorMessage}");
+                    }
                 }
             }
-            return null;
+            catch (HttpRequestException ex)
+            {
+                // Handle network-related errors (e.g., no internet connection)
+                System.Windows.MessageBox.Show($"Network error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Catch any other unhandled errors
+                System.Windows.MessageBox.Show($"Unexpected error: {ex.Message}");
+            }
+
+            return null; // Return null in case of failure
         }
+
     }
 
     public class LoginResponse
