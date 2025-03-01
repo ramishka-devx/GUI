@@ -33,13 +33,13 @@ namespace kalderama
                     var jsonResponse = await response.Content.ReadAsStringAsync();
                     var foodItems = JsonConvert.DeserializeObject<List<Food>>(jsonResponse); // Deserialize to List<Food>
 
-                    // Update the UI with food data
-                    _foodItems = foodItems;
-                    foreach (var food in _foodItems)
+                    // Make sure ImageUrl is properly set for each food item
+                    foreach (var food in foodItems)
                     {
                         food.UpdateDynamicProperties(); // Update button text and color based on the status
                     }
 
+                    _foodItems = foodItems;
                     foodsGrid.ItemsSource = _foodItems; // Bind food data to the DataGrid
                 }
                 else
@@ -48,6 +48,7 @@ namespace kalderama
                 }
             }
         }
+
 
         private async void DeleteOrRestoreFood_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -153,25 +154,24 @@ namespace kalderama
         // Format price as LKR
         public string PriceFormatted => $"LKR {Price:F2}";
 
-        // Status property to track active/inactive
+        public string StatusText => Status == 1 ? "ACTIVE" : "INACTIVE";
+        public string StatusColor => Status == 1 ? "Green" : "Orange";
+
+        public string image_url { get; set; } // Use the property name exactly as in the API
+
         public int Status { get; set; }
-
-        // StatusText property to display Active/Inactive status in the UI
-        public string StatusText => Status == 1 ? "ACTIVE" : "INACTIVE"; // If Status = 1, show ACTIVE, else INACTIVE
-
-        public string StatusColor => Status == 1 ? "Green" : "Orange"; // Optional: Color for the status (green for active, orange for inactive)
 
         public string ButtonActionText { get; set; }
         public string ButtonActionColor { get; set; }
 
-        public string ImageUrl { get; set; } // URL to the food image
-
         // Method to update UI properties (Button Text, Color)
         public void UpdateDynamicProperties()
         {
-            ButtonActionText = Status == 1 ? "Delete" : "Restore"; // Button text based on active/inactive
-            ButtonActionColor = Status == 1 ? "Red" : "Green"; // Button color (red for delete, green for restore)
+            ButtonActionText = Status == 1 ? "Delete" : "Restore";
+            ButtonActionColor = Status == 1 ? "Red" : "Green";
         }
     }
+
+
 
 }

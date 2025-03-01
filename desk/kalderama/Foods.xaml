@@ -31,10 +31,14 @@
                     <DataGridTemplateColumn Header="IMAGE" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImageUrl}" Width="50" Height="50"/>
+                                <!-- Make sure the binding matches the property name "image_url" -->
+                                <Image Source="{Binding image_url}" Width="50" Height="50"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+
+
 
                     <!-- ACTIONS Column (Delete or Restore Button) -->
                     <DataGridTemplateColumn Header="ACTIONS" Width="150">
