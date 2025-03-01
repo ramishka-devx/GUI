@@ -79,13 +79,13 @@ const login = (req, res) => {
         `;
         db.query(query, [identifier, identifier, identifier], async (err, results) => {
             if (err) return res.status(500).json({ error: err.message });
-            if (results.length === 0) return res.status(400).json({ message: 'Invalid identifier or password' });
+            if (results.length === 0) return res.status(401).json({ message: 'Invalid identifier or password' });
 
             const user = results[0];
 
             // Compare password
             const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) return res.status(400).json({ message: 'Invalid identifier or password' });
+            if (!isMatch) return res.status(401).json({ message: 'Invalid identifier or password' });
 
             // Generate JWT token
             const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET, { expiresIn: '1d' });
