@@ -90,7 +90,7 @@ const login = (req, res) => {
             // Generate JWT token
             const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-            res.status(200).json({ message: 'Login successful', type : user.roll , canteenId : user.canteenId, token });
+            res.status(200).json({ message: 'Login successful', type : user.roll ,Name : user.firstName + " " + user.lastName, canteenId : user.canteenId, token });
         });
     } catch (error) {
         console.log(error);

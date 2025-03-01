@@ -11,6 +11,7 @@ namespace kalderama
     {
         private const string BaseUrl = "http://localhost:5369";
         private string CanteenId = "";
+        private string Name = "";
 
         public LoginPage()
         {
@@ -27,9 +28,10 @@ namespace kalderama
             {
                 // Store canteenId for future requests
                 CanteenId = loginResponse.CanteenId.ToString();
+                Name = loginResponse.Name.ToString();
                 //MessageBox.Show("Login Successful");
                 // Proceed to the Dashboard
-                var dashboard = new DashBoard(CanteenId);
+                var dashboard = new DashBoard(CanteenId, Name);
                 dashboard.Show();
                 this.Close();
             }
@@ -96,6 +98,7 @@ namespace kalderama
         public string Message { get; set; }
         public string Type { get; set; }
         public int CanteenId { get; set; }
+        public string Name { get; set; }
         public string Token { get; set; }
     }
 }

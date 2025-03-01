@@ -2,19 +2,38 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace kalderama
 {
     public partial class DashBoard : Window
     {
         private readonly string _canteenId;
+        private readonly string _name;
 
-        public DashBoard(string canteenId)
+        public DashBoard(string canteenId, string Name)
         {
             InitializeComponent();
             _canteenId = canteenId;
+            _name = Name;
+            SetUserName(_name);
             LoadDashboardPage(); // Load default summary page in MainFrame
         }
+
+        private void SetUserName(string name)
+        {
+            if (!string.IsNullOrEmpty(name))
+            {
+                // Capitalize the first letter
+                userName.Text = char.ToUpper(name[0]) + name.Substring(1);
+            }
+            else
+            {
+                userName.Text = string.Empty;
+            }
+        }
+
+
 
         private void LoadDashboardPage()
         {
