@@ -1,66 +1,40 @@
 ﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace kalderama
 {
     public partial class DashBoard : Window
     {
         private readonly string _canteenId;
-        private const string BaseUrl = "http://localhost:5369";
 
         public DashBoard(string canteenId)
         {
             InitializeComponent();
             _canteenId = canteenId;
+            LoadDashboardPage(); // Load default summary page in MainFrame
         }
 
-        private async void btnLoadGraph_Click(object sender, RoutedEventArgs e)
+        private void LoadDashboardPage()
         {
-            var orderData = await GetDailyOrdersAsync();
-            if (orderData != null)
-            {
-                txtTotalOrders.Text = $"Total Orders: {orderData.TotalOrders}";
-                txtTotalRevenue.Text = $"Total Revenue: {orderData.TotalRevenue}";
-                // Call the graph API to display the graphs
-                LoadRevenueGraph();
-            }
-            else
-            {
-                // Handle the null case, e.g., show an error message
-                MessageBox.Show("Failed to load order data.");
-            }
+            MainFrame.Content = new DashboardHome();  // Loads DashboardHome.xaml inside MainFrame
         }
 
-
-        private async Task<DashboardResponse> GetDailyOrdersAsync()
+        private void btndash_Click(object sender, RoutedEventArgs e)
         {
-            using (var client = new HttpClient())
-            {
-                var url = $"{BaseUrl}/admin/dashboard/graph/dailyorders?canteenId={_canteenId}";
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<DashboardResponse>(jsonResponse);
-                }
-            }
-            return null;
+            LoadDashboardPage();  // Navigate back to the Dashboard Summary
         }
 
-        private void LoadRevenueGraph()
+        private void btnOrders_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Add graph rendering code here
+            MainFrame.Content = new Orders(); // Loads Orders Page inside Frame
         }
-    }
 
-    public class DashboardResponse
-    {
-        public int TotalOrders { get; set; }
-        public decimal TotalRevenue { get; set; }
-        public int PendingOrders { get; set; }
-        public int CompletedOrders { get; set; }
+
+        private void btnFoods_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Foods(); // Load Foods Page in Frame
+        }
     }
 }

@@ -1,0 +1,41 @@
+﻿<Page x:Class="kalderama.DashboardHome"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="DashboardHome">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+            <!-- Total Orders -->
+            <Border Background="LightBlue" Padding="15" Margin="10" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="Total Orders" FontSize="14" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Center"/>
+                    <TextBlock Name="txtTotalOrders" Text="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Total Revenue -->
+            <Border Background="LightGreen" Padding="15" Margin="10" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="Total Revenue" FontSize="14" FontWeight="Bold" Foreground="Green" HorizontalAlignment="Center"/>
+                    <TextBlock Name="txtTotalRevenue" Text="LKR 0.00" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Pending Orders -->
+            <Border Background="LightYellow" Padding="15" Margin="10" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="Pending Orders" FontSize="14" FontWeight="Bold" Foreground="Orange" HorizontalAlignment="Center"/>
+                    <TextBlock Name="txtPendingOrders" Text="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Completed Orders -->
+            <Border Background="Lavender" Padding="15" Margin="10" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="Completed Orders" FontSize="14" FontWeight="Bold" Foreground="Purple" HorizontalAlignment="Center"/>
+                    <TextBlock Name="txtCompletedOrders" Text="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>

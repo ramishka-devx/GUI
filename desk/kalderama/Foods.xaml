@@ -1,0 +1,54 @@
+﻿<Page x:Class="kalderama.Foods"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Food Management">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+            <TextBlock Text="Food Management" FontSize="24" FontWeight="Bold" Foreground="Black" Margin="10" HorizontalAlignment="Center"/>
+
+            <!-- Foods Table -->
+            <DataGrid Name="foodsGrid" AutoGenerateColumns="False" Height="300" Width="850" Margin="10" HeadersVisibility="Column" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="FOOD ID" Binding="{Binding FoodId}" Width="100"/>
+                    <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="150"/>
+                    <DataGridTextColumn Header="FOOD TITLE" Binding="{Binding FoodTitle}" Width="200"/>
+                    <DataGridTextColumn Header="PRICE" Binding="{Binding PriceFormatted}" Width="100"/>
+
+                    <!-- STATUS Column -->
+                    <DataGridTemplateColumn Header="STATUS" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding StatusText}" 
+                       Background="{Binding StatusColor}" 
+                       Foreground="White" Padding="5" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <!-- IMAGE Column -->
+                    <DataGridTemplateColumn Header="IMAGE" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImageUrl}" Width="50" Height="50"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- ACTIONS Column (Delete or Restore Button) -->
+                    <DataGridTemplateColumn Header="ACTIONS" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding ButtonActionText}" 
+                                        Background="{Binding ButtonActionColor}" 
+                                        Foreground="White" Padding="5" 
+                                        Click="DeleteOrRestoreFood_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>

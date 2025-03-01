@@ -1,0 +1,52 @@
+﻿<Page x:Class="kalderama.Orders"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Order Management">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+            <TextBlock Text="Order Management" FontSize="24" FontWeight="Bold" Foreground="Black" Margin="10" HorizontalAlignment="Center"/>
+
+            <!-- Date Picker & Search Box -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Select Date" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
+                    <DatePicker Name="dpSelectedDate" SelectedDateChanged="DpSelectedDate_SelectedDateChanged"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Search" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
+                    <TextBox Name="txtSearch" Width="200" Height="30" Padding="5"
+                             TextChanged="TxtSearch_TextChanged"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Orders Table -->
+            <DataGrid Name="ordersGrid" AutoGenerateColumns="False" Height="300" Width="850" Margin="10" 
+                      HeadersVisibility="Column" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ORDER ID" Binding="{Binding OrderId}" Width="100"/>
+                    <DataGridTextColumn Header="USER NAME" Binding="{Binding UserName}" Width="200"/>
+                    <DataGridTextColumn Header="DATE" Binding="{Binding FormattedDate}" Width="200"/>
+                    <DataGridTextColumn Header="ORDER ITEMS" Binding="{Binding OrderItemsSummary}" Width="200"/>
+                    <DataGridTextColumn Header="TOTAL PRICE" Binding="{Binding TotalPriceFormatted}" Width="100"/>
+
+                    <DataGridTextColumn Header="STATUS" Binding="{Binding StatusText}" Width="100"/>
+                    <DataGridTemplateColumn Header="ACTIONS" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding ButtonText}" 
+                    Background="{Binding ButtonColor}" 
+                    Foreground="White" 
+                    Padding="5" 
+                    Click="UpdateOrderStatus_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>

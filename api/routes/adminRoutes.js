@@ -9,7 +9,7 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-router.post('/orders', getOrdersAdmin);
+router.get('/orders', getOrdersAdmin);
 router.put('/orders/update', updateOrderStatus);
 
 //foods
