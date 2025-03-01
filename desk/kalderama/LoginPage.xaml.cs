@@ -27,7 +27,7 @@ namespace kalderama
             {
                 // Store canteenId for future requests
                 CanteenId = loginResponse.CanteenId.ToString();
-                MessageBox.Show("Login Successful");
+                //MessageBox.Show("Login Successful");
                 // Proceed to the Dashboard
                 var dashboard = new DashBoard(CanteenId);
                 dashboard.Show();

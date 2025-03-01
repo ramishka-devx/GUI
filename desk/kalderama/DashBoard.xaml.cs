@@ -36,5 +36,17 @@ namespace kalderama
         {
             MainFrame.Content = new Foods(); // Load Foods Page in Frame
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("Logging out...");
+         // Close the Dashboard window (optional)
+            LoginPage loginPage = new LoginPage();
+            loginPage.Show(); // Show the Login Page
+            this.Close();
+
+        }
+
+
     }
 }
