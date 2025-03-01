@@ -58,6 +58,8 @@ const register = async (req, res) => {
 const login = (req, res) => {
     const { identifier, password } = req.body;
 
+    console.log(identifier, password);
+
     // Validate the request body
     const { error } = validateLogin(req.body);
     if (error) {

@@ -1,0 +1,74 @@
+# Ignore Visual Studio-specific files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore build outputs
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]ogs/
+[Ll]ogs/
+*.log
+*.cache
+
+# Ignore NuGet packages
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+PackageRestoreErrors.log
+
+# Ignore Rider IDE files
+.idea/
+*.sln.iml
+
+# Ignore application insights
+ApplicationInsights.config
+ApplicationInsightsTelemetry.config
+
+# Ignore Resharper files
+_ReSharper.Caches/
+*.DotSettings.user
+
+# Ignore local database files
+*.mdf
+*.ldf
+*.db
+*.sqlite
+
+# Ignore generated files
+*.g.i.cs
+*.g.cs
+GeneratedFiles/
+ServiceFabricBackup/
+
+# Ignore publish outputs
+publish/
+out/
+
+# Ignore secrets and credentials
+secrets.json
+appsettings.json
+appsettings.*.json
+appsettings.Development.json
+
+# Ignore JetBrains Rider specific files
+.idea/
+
+# Ignore temporary files
+[Tt]emp/
+[Tt]humbs.db
+*.tmp
+*.bak
+~$*
+
+# Ignore Visual Studio Code settings
+.vscode/
+*.code-workspace
+
+# Ignore MacOS specific files
+.DS_Store
