@@ -84,9 +84,11 @@
             <!-- Profile Bar at the Top -->
             <Border Background="#007bff" Padding="10" HorizontalAlignment="Center" Grid.Row="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,0" Source="logo.png" Height="auto" Width="135" />
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,0" 
+               Source="logo.png" Width="135" Stretch="Uniform"/>
                 </StackPanel>
             </Border>
+
 
             <!-- Sidebar Buttons -->
             <StackPanel Grid.Row="1" Margin="0 30">

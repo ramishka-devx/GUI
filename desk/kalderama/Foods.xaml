@@ -1,52 +1,118 @@
 ﻿<Page x:Class="kalderama.Foods"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Food Management">
+      Title="Food Management" Background="#f8f9fa">
 
-    <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-            <TextBlock Text="Food Management" FontSize="24" FontWeight="Bold" Foreground="Black" Margin="10" HorizontalAlignment="Center"/>
+    <!-- Resources for Styling -->
+    <Page.Resources>
+        <!-- Rounded Button Style -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#007bff"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="10" 
+                        Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!-- Add New Food Button -->
-            <Button Content="Add New Food" Width="150" Height="40" HorizontalAlignment="Right" Margin="10" Click="AddNewFood_Click"/>
 
-            <!-- Foods Table -->
-            <DataGrid Name="foodsGrid" AutoGenerateColumns="False" Height="300" Width="850" Margin="10" HeadersVisibility="Column" CanUserAddRows="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="FOOD ID" Binding="{Binding FoodId}" Width="100"/>
-                    <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="150"/>
-                    <DataGridTextColumn Header="FOOD TITLE" Binding="{Binding FoodTitle}" Width="200"/>
-                    <DataGridTextColumn Header="PRICE" Binding="{Binding PriceFormatted}" Width="100"/>
 
-                    <DataGridTemplateColumn Header="STATUS" Width="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding StatusText}" Background="{Binding StatusColor}" Foreground="White" Padding="5" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="IMAGE" Width="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding image_url}" Width="50" Height="50"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+    </Page.Resources>
+    
+    
 
-                    <DataGridTemplateColumn Header="ACTIONS" Width="150">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="Delete" Background="Red" Foreground="White" Padding="5" Click="DeleteOrRestoreFood_Click"/>
-                                    <Button Content="Edit" Background="Orange" Foreground="White" Padding="5" Margin="5,0,0,0" Click="EditFood_Click"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-                </DataGrid.Columns>
-            </DataGrid>
+        <!-- Page Header -->
+        <TextBlock Text="Food Management" FontSize="28" FontWeight="Bold" Foreground="#007bff"
+                   Margin="0,0,0,20" HorizontalAlignment="Center" Grid.Row="0"/>
+
+        <!-- Add New Food Button -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="1">
+            <Button Content="Add New Food" Style="{StaticResource RoundedButtonStyle}" Click="AddNewFood_Click"/>
         </StackPanel>
+
+        <!-- Foods Table -->
+        <Border Background="White" Padding="15"
+                BorderBrush="#ddd" BorderThickness="1" Grid.Row="2"
+                CornerRadius="10"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto">
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <DataGrid Name="foodsGrid" AutoGenerateColumns="False" Margin="0" Width="Auto"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          HeadersVisibility="Column" CanUserAddRows="False" BorderThickness="0"
+                          Background="White" RowBackground="White" AlternatingRowBackground="#f9f9f9"
+                          GridLinesVisibility="None"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ColumnWidth="*" RowHeight="50">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="FOOD ID" Binding="{Binding FoodId}" Width="110"/>
+                        <DataGridTextColumn Header="FOOD TITLE" Binding="{Binding FoodTitle}" Width="200"/>
+                        <DataGridTextColumn Header="Category" Binding="{Binding categoryTitle}" Width="110"/>
+                        <DataGridTextColumn Header="PRICE" Binding="{Binding Price}" Width="100"/>
+
+                        <!-- Status Column -->
+                        <DataGridTemplateColumn Header="STATUS" Width="150">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StatusText}" FontWeight="Bold" Foreground="Black"
+                                               HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- Image Column -->
+                        <DataGridTemplateColumn Header="IMAGE" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding image_url}" 
+                                           Stretch="UniformToFill" HorizontalAlignment="Center" Width="100" Height="Auto"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- Actions Column -->
+                        <DataGridTemplateColumn Header="ACTIONS" Width="300">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0">
+                                        <Button Content="{Binding ButtonActionText}" Background="{Binding ButtonActionColor}"
+                                                Style="{StaticResource RoundedButtonStyle}" Click="DeleteOrRestoreFood_Click"/>
+                                        <Button Content="Edit" Background="Orange"
+                                                Style="{StaticResource RoundedButtonStyle}" Margin="5,0,0,0" 
+                                                Click="EditFood_Click"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Page>

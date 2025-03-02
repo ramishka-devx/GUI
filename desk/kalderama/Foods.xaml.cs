@@ -32,16 +32,32 @@ namespace kalderama
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonResponse = await response.Content.ReadAsStringAsync();
-                    var foodItems = JsonConvert.DeserializeObject<List<Food>>(jsonResponse); // Deserialize to List<Food>
+                    var foodData = JsonConvert.DeserializeObject<List<dynamic>>(jsonResponse); // Deserialize into a dynamic list
 
-                    // Make sure ImageUrl is properly set for each food item
+                    List<Food> foodItems = new List<Food>();
+
+                    // Manually map JSON response to Food objects
+                    foreach (var item in foodData)
+                    {
+                        foodItems.Add(new Food
+                        {
+                            FoodId = item.foodId,
+                            categoryTitle = item.categoryTitle, // Manually mapping
+                            FoodTitle = item.foodTitle,
+                            Price = item.price,
+                            Status = item.status,
+                            image_url = item.image_url,
+                        });
+                    }
+
+                    // Update dynamic properties and bind to UI
                     foreach (var food in foodItems)
                     {
-                        food.UpdateDynamicProperties(); // Update button text and color based on the status
+                        food.UpdateDynamicProperties();
                     }
 
                     _foodItems = foodItems;
-                    foodsGrid.ItemsSource = _foodItems; // Bind food data to the DataGrid
+                    foodsGrid.ItemsSource = _foodItems; // Bind data
                 }
                 else
                 {
@@ -49,6 +65,7 @@ namespace kalderama
                 }
             }
         }
+
 
         private async void DeleteOrRestoreFood_Click(object sender, RoutedEventArgs e)
         {
@@ -163,7 +180,7 @@ namespace kalderama
     public class Food
     {
         public int FoodId { get; set; }
-        public string Category { get; set; }
+        public string categoryTitle { get; set; }
         public string FoodTitle { get; set; }
         public decimal Price { get; set; }
         public string StatusText => Status == 1 ? "ACTIVE" : "INACTIVE";

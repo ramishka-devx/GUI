@@ -146,6 +146,7 @@
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
                           IsHitTestVisible="True" IsEnabled="True">
 
+
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ORDER ID" Binding="{Binding OrderId}" Width="100"/>
                         <DataGridTextColumn Header="USER NAME" Binding="{Binding UserName}" Width="200"/>
