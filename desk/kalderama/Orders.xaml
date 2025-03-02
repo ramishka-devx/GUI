@@ -136,16 +136,29 @@
             <!-- ScrollViewer for Table -->
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
                 <DataGrid Name="ordersGrid" SelectionMode="Single" SelectionUnit="FullRow"
-                          AutoGenerateColumns="False" Margin="10"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          HeadersVisibility="Column" CanUserAddRows="False" BorderThickness="0"
-                          Background="White" RowBackground="White" AlternatingRowBackground="#f9f9f9"
-                          GridLinesVisibility="None"
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                          IsHitTestVisible="True" IsEnabled="True">
+          AutoGenerateColumns="False" Margin="10"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          HeadersVisibility="Column" CanUserAddRows="False" BorderThickness="0"
+          Background="White" RowBackground="White" AlternatingRowBackground="#f9f9f9"
+          GridLinesVisibility="None"
+          ScrollViewer.HorizontalScrollBarVisibility="Auto"
+          ScrollViewer.VerticalScrollBarVisibility="Auto"
+          IsHitTestVisible="True" IsEnabled="True"
+          RowHeight="50">
+                    <!-- Adjusts Row Height -->
 
+                    <!-- Apply RowStyle -->
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Padding" Value="10"/>
+                            <!-- Adds Padding Inside Each Row -->
+                            <Setter Property="Height" Value="60"/>
+                            <!-- Adjusts Row Height -->
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <!-- Centers Content Vertically -->
+                        </Style>
+                    </DataGrid.RowStyle>
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ORDER ID" Binding="{Binding OrderId}" Width="100"/>
@@ -159,16 +172,16 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="{Binding ButtonText}" Background="{Binding ButtonColor}"
-                                            Foreground="White" Padding="5" FontSize="14" 
-                                            Width="100" Height="30" Cursor="Hand"
-                                            BorderThickness="0" Style="{StaticResource RoundedButtonStyle}"
-                                            Click="UpdateOrderStatus_Click"/>
+                            Foreground="White" Padding="5" FontSize="14" 
+                            Width="100" Height="30" Cursor="Hand"
+                            BorderThickness="0" Style="{StaticResource RoundedButtonStyle}"
+                            Click="UpdateOrderStatus_Click"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
                 </DataGrid>
+
             </ScrollViewer>
         </Border>
 
