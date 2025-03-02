@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace kalderama
 {
@@ -57,6 +58,21 @@ namespace kalderama
                 MessageBox.Show($"Error loading food data: {ex.Message}"); // ✅ Semicolon added
             }
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove(); // Enables window dragging
+            }
+        }
+
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+
 
 
         // Handle the Update button click

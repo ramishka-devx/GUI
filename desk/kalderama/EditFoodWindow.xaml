@@ -2,39 +2,47 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Edit Food" Height="650" Width="450"
-        Background="#F7F7F7" WindowStartupLocation="CenterScreen"
-        FontFamily="Segoe UI" FontSize="14">
+        Background="#EAEAEA" WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI" FontSize="14"
+        AllowsTransparency="True" WindowStyle="None">
 
-    <Grid>
-        <Border Background="White" CornerRadius="10" Padding="20" Margin="10">
+    <Border Background="White" CornerRadius="12" Padding="20" Margin="10"
+            MouseDown="Window_MouseDown">
+        <Grid>
             <StackPanel>
 
+                <!-- Close Button -->
+                <Button Content="✖" HorizontalAlignment="Right" Background="Transparent" 
+                        BorderThickness="0" FontSize="16" Foreground="Gray" 
+                        Click="CloseWindow_Click" Padding="2" Cursor="Hand"/>
+
                 <!-- Title -->
-                <TextBlock Text="Edit Food" FontSize="24" FontWeight="Bold" 
-                           HorizontalAlignment="Center" Margin="0,0,0,20" Foreground="#333"/>
+                <TextBlock Text="Edit Food" FontSize="22" FontWeight="Bold" 
+                           HorizontalAlignment="Center" Margin="0,0,0,15" Foreground="#333"/>
 
                 <!-- Food Title -->
-                <TextBlock Text="Food Title" FontSize="14" Foreground="#666" Margin="0,5"/>
-                <Border Background="White" BorderBrush="#CCC" BorderThickness="1" CornerRadius="5" Padding="5">
-                    <TextBox Name="txtTitle" Background="Transparent" BorderThickness="0"/>
+                <TextBlock Text="Food Title" FontSize="14" Foreground="#666" Margin="0,0,0,5"/>
+                <Border Background="White" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="5">
+                    <TextBox Name="txtTitle" Background="Transparent" BorderThickness="0" FontSize="14"/>
                 </Border>
 
                 <!-- Price -->
                 <TextBlock Text="Price (LKR)" FontSize="14" Foreground="#666" Margin="10,5,0,5"/>
-                <Border Background="White" BorderBrush="#CCC" BorderThickness="1" CornerRadius="5" Padding="5">
-                    <TextBox Name="txtPrice" Background="Transparent" BorderThickness="0"/>
+                <Border Background="White" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="5">
+                    <TextBox Name="txtPrice" Background="Transparent" BorderThickness="0" FontSize="14"/>
                 </Border>
 
                 <!-- Image Display -->
                 <TextBlock Text="Food Image" FontSize="14" Foreground="#666" Margin="10,10,0,5"/>
-                <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="5" Padding="5">
+                <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="5">
                     <Image Name="foodImage" Width="300" Height="180" Stretch="UniformToFill"/>
                 </Border>
 
                 <!-- Image URL (Read-Only) -->
                 <TextBlock Text="Image URL" FontSize="14" Foreground="#666" Margin="10,5,0,5"/>
-                <Border Background="#EEE" BorderBrush="#CCC" BorderThickness="1" CornerRadius="5" Padding="5">
-                    <TextBox Name="txtImageUrl" Background="Transparent" BorderThickness="0" IsReadOnly="True" Foreground="#888"/>
+                <Border Background="#F0F0F0" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="5">
+                    <TextBox Name="txtImageUrl" Background="Transparent" BorderThickness="0" 
+                             IsReadOnly="True" Foreground="#888" FontSize="12"/>
                 </Border>
 
                 <!-- Update Button -->
@@ -42,8 +50,8 @@
                         Width="300" Height="45"
                         Background="#0B8AD9" Foreground="White"
                         FontWeight="Bold" FontSize="16"
-                        HorizontalAlignment="Center"
-                        Click="UpdateFood_Click"
+                        Cursor="Hand" BorderThickness="0"
+                        HorizontalAlignment="Center" Click="UpdateFood_Click"
                         Margin="20,15,0,0">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -51,7 +59,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 
-                                                CornerRadius="10"
+                                                CornerRadius="8"
                                                 Padding="10"
                                                 BorderThickness="0">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -64,6 +72,6 @@
                 </Button>
 
             </StackPanel>
-        </Border>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>
