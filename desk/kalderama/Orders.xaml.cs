@@ -146,7 +146,7 @@ namespace kalderama
         public int OrderStatus { get; set; }
         public List<OrderItem> OrderItems { get; set; }
 
-        public string OrderItemsSummary => string.Join(", ", OrderItems.ConvertAll(i => $"{i.FoodTitle}, {i.Quantity} x {i.Price}"));
+        public string OrderItemsSummary => string.Join("\n", OrderItems.ConvertAll(i => $"{i.FoodTitle}, {i.Quantity} x {i.Price}"));
 
         // Dynamic UI Properties
         public string ButtonText { get; private set; }

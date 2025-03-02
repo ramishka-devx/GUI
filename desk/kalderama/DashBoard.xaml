@@ -62,18 +62,18 @@
     <Grid>
         <!-- Define Grid Columns -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1*" MinWidth="200"/>
             <!-- Sidebar -->
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
             <!-- Main Content -->
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <Grid Grid.Column="0" Background="#007bff" Width="200">
+        <Grid Grid.Column="0" Background="#007bff" Width="Auto" MinWidth="200">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Profile Bar -->
                 <RowDefinition Height="*"/>
+                <!-- Profile Bar -->
+                <RowDefinition Height="2*"/>
                 <!-- Sidebar Buttons -->
                 <RowDefinition Height="50"/>
                 <!-- Spacer -->
@@ -125,7 +125,7 @@
             </Border>
 
             <!-- Frame (Fixed Position) -->
-            <Frame Name="MainFrame" Grid.Row="1" Margin="10" Foreground="White"/>
+            <Frame Name="MainFrame"  NavigationUIVisibility="Hidden" Grid.Row="1" Margin="10" Foreground="White"/>
         </Grid>
     </Grid>
 </Window>
