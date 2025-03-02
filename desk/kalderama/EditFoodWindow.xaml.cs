@@ -22,30 +22,42 @@ namespace kalderama
         // Load food data using GET request
         private async void LoadFoodData()
         {
-            using (var client = new HttpClient())
+            try
             {
-                var url = $"{BaseUrl}/admin/foods?foodId={_foodId}";
-                var response = await client.GetAsync(url);
-
-                if (response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
-                    var food = JsonConvert.DeserializeObject<FoodItem>(jsonResponse); // Deserialize into FoodItem
+                    var url = $"{BaseUrl}/admin/foods?foodId={_foodId}";
+                    var response = await client.GetAsync(url);
 
-                    // Set the loaded data into the UI
-                    txtTitle.Text = food.title;
-                    txtPrice.Text = food.Price.ToString();
-                    txtImageUrl.Text = food.image_url; // Display image URL (read-only)
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonResponse = await response.Content.ReadAsStringAsync();
+                        var food = JsonConvert.DeserializeObject<FoodItem>(jsonResponse); // ✅ Semicolon added
 
-                    // Display the image (but don't allow it to be edited)
-                    foodImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(food.image_url));
-                }
-                else
-                {
-                    MessageBox.Show("Failed to load food data.");
+                        if (food != null) // ✅ Null check
+                        {
+                            txtTitle.Text = food.title;
+                            txtPrice.Text = food.Price.ToString();
+                            txtImageUrl.Text = food.image_url;
+
+                            if (!string.IsNullOrEmpty(food.image_url))
+                            {
+                                foodImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(food.image_url));
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to load food data.");
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading food data: {ex.Message}"); // ✅ Semicolon added
+            }
         }
+
 
         // Handle the Update button click
         private async void UpdateFood_Click(object sender, RoutedEventArgs e)
