@@ -88,6 +88,11 @@ namespace kalderama
             }
         }
 
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close(); // Closes the window
+        }
+
         // Helper method to map category name to categoryId
         private int GetCategoryId(string categoryName)
         {
