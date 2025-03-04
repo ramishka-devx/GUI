@@ -1,57 +1,127 @@
-/* Container for the slider */
-.slider-container {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
-    overflow: hidden;
-    border-radius: 10px;
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Adjust height as needed */
+  overflow: hidden;
+  /* margin: auto; */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.carousel-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+
+}
+
+.carousel-text {
+  position: absolute;
+  bottom: 0;
+  left: 0; /* Align it to the left */
+  width: 100%; /* Make it full width */
+  height: 60%;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  color: white;
+  padding: 20px; /* Adjust padding for better spacing */
+  font-size: 3.1rem;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  /* border: 1px red solid; */
+}
+
+.carousel-text:hover{
+  transform: scale(1.1);
+  transform-style: ease-in-out;
+  transition-duration: 0.3s;
+}
+
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 10;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-arrow.left {
+  left: 10px;
+}
+
+.carousel-arrow.right {
+  right: 10px;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width: 1024px) {
+  .carousel-container {
+      height: 400px; /* Reduce height */
   }
-  
-  /* Style the images */
-  .slider {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+
+  .carousel-text {
+      font-size: 2.5rem; /* Reduce text size */
   }
-  
-  .slider-image {
-    width: 100%;
-    height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-container {
+      height: 300px; /* Make slider smaller on mobile */
   }
-  
-  /* Button controls */
-  .controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
+
+  .carousel-text {
+      font-size: 1.8rem; /* Adjust text for readability */
+      padding: 15px;
   }
-  
-  .prev-btn, .next-btn {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    border-radius: 50%;
+
+  .carousel-arrow {
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
   }
-  
-  .prev-btn:hover, .next-btn:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Swipe effect for mobile */
-  @media (max-width: 768px) {
-    .slider-container {
-      max-width: 100%;
-    }
-    
-    .controls {
-      top: 90%;
-      transform: translateY(-90%);
-    }
-  }
-  
+}

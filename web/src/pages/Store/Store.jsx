@@ -211,52 +211,97 @@ const Orders = ({ setCartItemCounter }) => {
           <div>
             <div className="food-items">
               {foods.map((food) => (
-                <div key={food.foodId} className="food-card">
-                  <img
-                    src={food.image_url}
-                    alt={food.title}
-                    className="food-image"
-                  />
-                  <div className="food-details">
-                    <h4>{food.title}</h4>
-                    <p className="food-price">LKR {food.price.toFixed(2)}</p>
-                  </div>
-                  <div className="food-actions">
-                    {isInCart(food.foodId) ? (
-                      <button
-                        className="btn remove-from-cart"
-                        onClick={() => removeFromCart(food.foodId)}
-                      >
-                        Remove
-                      </button>
-                    ) : (
-                      <>
-                        <input
-                          type="number"
-                          min="1"
-                          defaultValue="1"
-                          className="quantity-input"
-                          id={`quantity-${food.foodId}`}
-                        />
-                        <button
-                          className="btn add-to-cart"
-                          onClick={() =>
-                            addToCart(
-                              food,
-                              Number(
-                                document.getElementById(
-                                  `quantity-${food.foodId}`
-                                ).value
-                              )
-                            )
-                          }
-                        >
-                          Add to Cart
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </div>
+                // <div key={food.foodId} className="food-card">
+                //   <img
+                //     src={food.image_url}
+                //     alt={food.title}
+                //     className="food-image"
+                //   />
+                //   <div className="food-details">
+                //     <h4>{food.title}</h4>
+                //     <p className="food-price">LKR {food.price.toFixed(2)}</p>
+                //   </div>
+                //   <div className="food-actions">
+                //     {isInCart(food.foodId) ? (
+                //       <button
+                //         className="btn remove-from-cart"
+                //         onClick={() => removeFromCart(food.foodId)}
+                //       >
+                //         Remove
+                //       </button>
+                //     ) : (
+                //       <>
+                //         <input
+                //           type="number"
+                //           min="1"
+                //           defaultValue="1"
+                //           className="quantity-input"
+                //           id={`quantity-${food.foodId}`}
+                //         />
+                //         <button
+                //           className="btn add-to-cart"
+                //           onClick={() =>
+                //             addToCart(
+                //               food,
+                //               Number(
+                //                 document.getElementById(
+                //                   `quantity-${food.foodId}`
+                //                 ).value
+                //               )
+                //             )
+                //           }
+                //         >
+                //           Add to Cart
+                //         </button>
+                //       </>
+                //     )}
+                //   </div>
+                // </div>
+                <div key={food.foodId} className="card-container">
+  <img
+    src={food.image_url}
+    alt={food.title}
+    className="card-image"
+  />
+  <div className="card-content">
+    <h4 className="card-title">{food.title}</h4>
+    <p className="card-price">LKR {food.price.toFixed(2)}</p>
+  </div>
+  <div className="card-actions">
+    {isInCart(food.foodId) ? (
+      <button
+        className="remove-from-cart"
+        onClick={() => removeFromCart(food.foodId)}
+      >
+        Remove
+      </button>
+    ) : (
+      <>
+        <input
+          type="number"
+          min="1"
+          defaultValue="1"
+          className="quantity-input"
+          id={`quantity-${food.foodId}`}
+        />
+        <button
+          className="add-to-cart"
+          onClick={() =>
+            addToCart(
+              food,
+              Number(
+                document.getElementById(`quantity-${food.foodId}`).value
+              )
+            )
+          }
+        >
+          Add to Cart
+        </button>
+      </>
+    )}
+  </div>
+</div>
+
               ))}
             </div>
 

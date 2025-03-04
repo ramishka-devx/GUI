@@ -1,0 +1,190 @@
+.hero-section  {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero-eye {
+    padding-top: 30px;
+transform: scaleY(20px);
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+gap: 36px;
+width: 100%;
+/* border: 1px solid rgb(0, 255, 64); */
+
+}
+.slider-container {
+    width: 900px;
+    height: 500px;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+/* border: 1px solid red; */
+
+}
+
+.hero-img-B {
+    position: relative;
+    background-image: url("../../../public/5.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 200px; /* Kept original width */
+    height: 230px; /* Kept original height */
+    border-radius: 8px;
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevents overlay overflow */
+    transition: transform 0.3s ease-in-out;
+}
+
+.hero-img-B::after {
+    content: "";
+    position: absolute;
+    bottom: 0; /* Initially hidden below */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Slight dark overlay */
+    backdrop-filter: blur(5px); /* Smooth blur effect */
+    transition: bottom 0.4s ease-in-out;
+    border-radius: 8px;
+}
+
+.hero-img-B:hover::after {
+    bottom: 0; /* Moves up on hover */
+}
+
+.hero-img-B:hover {
+    transform: scale(1.02); /* Slight enlargement effect */
+}
+
+.hero-img-B button {
+    position: relative;
+    z-index: 10;
+    background-color: #e63947ce;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Kept original padding */
+    border-radius: 5px; /* Kept original radius */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: inherit; /* Kept original font size */
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.hero-img-B:hover button {
+    opacity: 1; /* Button fades in */
+}
+
+.hero-img-B button:hover {
+    background-color: #d62828;
+}
+
+.hero-img-A {
+    position: relative;
+    background-image: url("../../../public/4.webp"); 
+    background-size: cover;
+    background-position: center;
+    width: 100%; /* Makes it responsive */
+    max-width: 300px; /* Adjust width for a refined look */
+    height: 230px; /* Balanced height */
+    border-radius: 10px;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.hero-img-A::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); /* Subtle dark overlay for readability */
+    backdrop-filter: blur(5px); /* Light blur effect for a premium feel */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.hero-img-A h3 {
+    position: relative;
+    z-index: 10;
+    color: white;
+    font-size: 1.3rem; /* Professional size */
+    font-weight: 600; /* Clean and readable */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 10px;
+}
+.hero-img-A:hover {
+    transform: scale(1.02); 
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-eye {
+        flex-direction: column; /* Stack items for tablets */
+        align-items: center;
+        gap: 24px; /* Reduce spacing */
+        width: 80%;
+    }
+
+    .slider-container {
+        width: 100%;
+        height: 350px; /* Reduce height */
+    }
+
+    .right-side {
+        width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            column-gap: 24px;
+    }
+
+    .hero-img-A,
+    .hero-img-B {
+        width: 180px; /* Adjust size */
+        height: 220px;
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-eye {
+        flex-direction: column; /* Stack items */
+        gap: 20px;
+        width: 90%;
+    }
+
+    .slider-container {
+        width: 100%;
+        height: 300px;
+    }
+
+    .right-side {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        column-gap: 20px;
+    }
+
+    .hero-img-A,
+    .hero-img-B {
+        width: 100%; /* Adjust size */
+        height: 200px;
+    }
+}
+

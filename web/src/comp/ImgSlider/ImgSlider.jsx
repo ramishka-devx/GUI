@@ -1,61 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import './ImgSlider.css';
+import React, { useState, useEffect } from "react";
+import "./ImgSlider.css"; // Ensure CSS file is updated
 
-const ImageSlider = () => {
-  const images = [
-    { id: 1, src: 'https://via.placeholder.com/800x300?text=Slide+1', alt: 'Slide 1' },
-    { id: 2, src: 'https://via.placeholder.com/800x300?text=Slide+2', alt: 'Slide 2' },
-    { id: 3, src: 'https://via.placeholder.com/800x300?text=Slide+3', alt: 'Slide 3' },
-  ];
-
+const ImgSlider = ({ images = [], texts = [], interval = 10000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isSliding, setIsSliding] = useState(false);
 
-  // Handle the next and previous slide change
+  useEffect(() => {
+    if (images.length === 0) return;
+    
+    const autoSlide = setInterval(() => {
+      nextSlide();
+    }, interval);
+
+    return () => clearInterval(autoSlide);
+  }, [currentIndex, images.length]);
+
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setIsSliding(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setIsSliding(false);
+    }, 500); // Matches transition duration
   };
 
   const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
+    setIsSliding(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      );
+      setIsSliding(false);
+    }, 500);
   };
 
-  // Handle touch swipe events
-  const handleTouchStart = (e) => {
-    const touchStart = e.touches[0].clientX;
-    e.target.addEventListener('touchmove', (e) => handleTouchMove(e, touchStart));
-  };
-
-  const handleTouchMove = (e, touchStart) => {
-    const touchEnd = e.touches[0].clientX;
-    if (touchStart - touchEnd > 50) {
-      nextSlide();
-    }
-    if (touchStart - touchEnd < -50) {
-      prevSlide();
-    }
-    e.target.removeEventListener('touchmove', (e) => handleTouchMove(e, touchStart));
-  };
+  if (images.length === 0) {
+    return <div className="carousel-container">No images available</div>;
+  }
 
   return (
-    <div className="slider-container">
-      <div
-        className="slider"
-        onTouchStart={handleTouchStart}
-      >
-        <img
-          src={images[currentIndex].src}
-          alt={images[currentIndex].alt}
-          className="slider-image"
-        />
+    <div className="carousel-container">
+      <button className="carousel-arrow left" onClick={prevSlide}>&#10094;</button>
+      <div className="carousel-wrapper">
+        <div
+          className="carousel-track"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className="carousel-slide"
+              style={{ backgroundImage: `url(${image})` }}
+            >
+              <div className="carousel-text">{texts[index] || ""}</div>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="controls">
-        <button onClick={prevSlide} className="prev-btn">❮</button>
-        <button onClick={nextSlide} className="next-btn">❯</button>
-      </div>
+      <button className="carousel-arrow right" onClick={nextSlide}>&#10095;</button>
     </div>
   );
 };
 
-export default ImageSlider;
+export default ImgSlider;
