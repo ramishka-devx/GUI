@@ -13,6 +13,8 @@ import Cart from "./pages/cart/Cart";
 import ProfilePage from "./pages/profile/Profile";
 import AdminHome from "./admin/pages/adminHome/AdminHome";
 import SideNav from "./comp/sideNavBar/SideNavBar";
+import Home from "./pages/Home/Home";
+import Footer from "./comp/footer/Footer";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,13 +46,14 @@ const App = () => {
       <ShowNavbarOrAdmin />
       <SideNav isSideNavOpen={isSideNavOpen} setIsSideNavOpen={setIsSideNavOpen} isLoggedIn = {isLoggedIn} />
       <Routes>
-        <Route path="/" element={<HeroSection />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/store" element={<Store setCartItemCounter={setCartItemCounter} />} />
         <Route path="/cart" element={<Cart setCartItemCounter={setCartItemCounter} />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
+      <Footer/>
 
       <ToastContainer
         position="top-right"

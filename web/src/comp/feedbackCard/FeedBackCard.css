@@ -1,0 +1,61 @@
+.feedback-card {
+  max-width: 350px;
+  background-color: white;
+  color: #333;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.feedback-card:hover {
+  transform: scale(1.05);
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.profile-icon {
+  width: 45px;
+  height: 45px;
+  background-color: #0b8ad9; /* Your theme's blue */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.feedback-title {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.feedback-stars {
+  font-size: 20px;
+  color: gold;
+  margin: 8px 0;
+}
+
+.feedback-text {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+  margin-top: 5px;
+}
