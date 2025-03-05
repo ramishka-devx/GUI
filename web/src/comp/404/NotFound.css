@@ -1,0 +1,36 @@
+.not-found-container {
+    text-align: center;
+    padding: 50px 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .not-found-logo {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .not-found-title {
+    color: #0088cc; /* Matches the blue from the login button in the image */
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .not-found-message {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .not-found-submessage {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+  
+  .not-found-button {
+    background-color: #0088cc; /* Matches the blue from the login button in the image */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  

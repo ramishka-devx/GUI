@@ -83,7 +83,7 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      <h1>Your Cart</h1>
+      <h1>Your cart</h1>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -93,7 +93,7 @@ const Cart = () => {
               <div key={item.foodId} className="cart-item">
                 <div className="item-details">
                   <h4>{item.title}</h4>
-                  <p>Price: LKR {item.price.toFixed(2)}</p>
+                  <p>LKR {item.price.toFixed(2)}</p>
                 </div>
                 <div className="item-actions">
                   <input

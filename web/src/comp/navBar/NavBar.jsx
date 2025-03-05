@@ -43,7 +43,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter, setIsSideNavOpen, 
             </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/feedback">Feedback</Link>
           </li>
           <li>
             <Link to="/store">Order</Link>

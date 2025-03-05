@@ -15,6 +15,7 @@ import AdminHome from "./admin/pages/adminHome/AdminHome";
 import SideNav from "./comp/sideNavBar/SideNavBar";
 import Home from "./pages/Home/Home";
 import Footer from "./comp/footer/Footer";
+import NotFound from "./comp/404/NotFound";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,6 +53,9 @@ const App = () => {
         <Route path="/store" element={<Store setCartItemCounter={setCartItemCounter} />} />
         <Route path="/cart" element={<Cart setCartItemCounter={setCartItemCounter} />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/contact" element={<Home />} />
+        <Route path="/feedback" element={<Home />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
       <Footer/>
 

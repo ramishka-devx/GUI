@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import FeedbackCard from "../feedbackCard/FeedBackCard";
 import "./FeedBack.css";
 import TitleCard from "../title/TitleCard";
+import { useLocation } from "react-router-dom";
 
 function FeedBack() {
-  // Sample feedbacks for a university restaurant
+  const feedRef = useRef(null); // Create the ref here
+
   const feedbacks = [
     {
       name: "Kasun Perera",
@@ -44,23 +46,29 @@ function FeedBack() {
     }
   ];
 
-  return (
-    <>
-        <TitleCard title = {"Feedbacks"}/>
-    <div className="feedback-grid">
-    
-      {feedbacks.map((fb, index) => (
-        <FeedbackCard 
-          key={index} 
-          name={fb.name} 
-          title={fb.title} 
-          feedback={fb.feedback} 
-          rating={fb.rating} 
-        />
-      ))}
-    </div>
-    </>
+  const location = useLocation();   // Correct placement
 
+  useEffect(() => {
+    if (location.pathname === '/feedback' && feedRef.current) {
+      feedRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location]);
+
+  return (
+    <div ref={feedRef}> {/* Attach the ref to the top-level element */}
+      <TitleCard title = {"Feedbacks"}/>
+      <div className="feedback-grid">
+        {feedbacks.map((fb, index) => (
+          <FeedbackCard
+            key={index}
+            name={fb.name}
+            title={fb.title}
+            feedback={fb.feedback}
+            rating={fb.rating}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
