@@ -6,7 +6,13 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ProfileDropdown from "../../admin/components/ProfileDropDown/ProfileDropDown";
 import { RiMenu3Line } from "react-icons/ri";
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter, setIsSideNavOpen, isSideNavOpen }) => {
+const Navbar = ({
+  isLoggedIn,
+  setIsLoggedIn,
+  cartItemCounter,
+  setIsSideNavOpen,
+  isSideNavOpen,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
@@ -43,10 +49,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, cartItemCounter, setIsSideNavOpen, 
             </Link>
           </li>
           <li>
-            <Link to="/feedback">Feedback</Link>
+            <Link to="/store">Order</Link>
           </li>
           <li>
-            <Link to="/store">Order</Link>
+            <Link to="/feedback">Feedback</Link>
           </li>
           <li>
             <Link to="/contact">Contact</Link>

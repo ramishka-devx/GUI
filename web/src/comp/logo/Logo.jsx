@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Logo = ({ fontSize = 2 }) => {
-  // Define the styles inside the component
   const logoContainerStyle = {
     display: "flex",
     flexDirection: "row",
@@ -12,7 +11,7 @@ const Logo = ({ fontSize = 2 }) => {
   };
 
   const logoTextStyle = {
-    fontFamily: "Disapamok",  // Ensure the 'Disapamok' font is loaded
+    fontFamily: "Disapamok",  
     fontSize: fontSize + "rem",  // Use the fontSize prop with default value
     fontWeight: "400",
   };
