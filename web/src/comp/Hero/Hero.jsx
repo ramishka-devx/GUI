@@ -16,7 +16,6 @@ const texts = [
 const HeroSection = () => {
   return (
     <>
-      <Welcome />
       <div className="hero-section ">
         <div className="hero-eye">
           <div className="slider-container">

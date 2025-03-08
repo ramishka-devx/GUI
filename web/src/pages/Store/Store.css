@@ -16,8 +16,9 @@
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: #fff;
+  padding-right: 20px;
 }
 
 /* Selector Container */
@@ -65,7 +66,7 @@
 }
 
 .category-btn.active {
-  background-color: #007bff;
+  background-color: #0b8ad9;
   color: #fff;
   border-color: #007bff;
 }
@@ -78,7 +79,6 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Food Card Container */
 /* Food Card Container */
 .food-items {
   display: grid;
@@ -138,7 +138,7 @@
   gap: 10px;
 }
 
-.food-actions .btn {
+ .btn {
   flex: 1;
   padding: 10px 15px;
   font-size: 1rem;
@@ -148,18 +148,18 @@
   transition: background-color 0.3s, transform 0.2s;
 }
 
-.food-actions .btn:hover {
+.card-actions .btn:hover {
   transform: scale(1.05);
 }
 
 /* Add to Cart Button */
-.food-actions .btn.add-to-cart {
+.card-actions .btn.add-to-cart {
   background-color: #ffc107; /* Yellow for "Add to Cart" */
   color: #000;
   font-weight: 500;
 }
 
-.food-actions .btn.add-to-cart:hover {
+.card-actions .btn.add-to-cart:hover {
   background-color: #e0a800;
 }
 
@@ -186,63 +186,79 @@
 }
 
 /* Remove Button */
-.food-actions .btn.remove-from-cart {
+.remove-from-cart {
   background-color: #dc3545;
   color: white;
 }
 
-.food-actions .btn.remove-from-cart:hover {
+.remove-from-cart:hover {
   background-color: #c82333;
 }
 
 
 
-/* Pagination */
 .pagination {
+  margin-top: 30px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-top: 20px;
+  padding: 15px;
 }
 
 .pagination button {
-  padding: 10px 15px;
+  padding: 10px 20px;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  font-weight: 500;
+  border: none;
+  border-radius: 9px;
+  background-color: #0b8ad9;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .pagination button:hover {
-  background-color: #007bff;
-  color: white;
+  background-color: #086ca8;
 }
 
 .pagination button:disabled {
-  background-color: #e0e0e0;
-  color: #888;
+  background-color: #b0d9f5;
+  color: #ffffff;
   cursor: not-allowed;
 }
 
 .pagination span {
   font-size: 1rem;
   font-weight: bold;
+  color: #0b8ad9;
 }
 
 /* Responsive Adjustments */
 @media (min-width: 768px) {
+  .orders-container{
+    margin: 20px 10%;
+   
+  }
   .selector-container {
-    flex-direction: row; /* Align selectors in a row for desktop */
+    flex-direction: row; 
     align-items: center;
     gap: 20px;
+    /* border: red 1px solid; */
   }
 
-  .canteen-selector,
+  .canteen-selector{
+    width: 20%;
+    /* border: red 1px solid; */
+
+  }
+  .canteen-select{
+    /* width: 10%; */
+  }
   .category-scroll {
-    flex: 1; /* Equal space for both sections */
+    flex: 1; 
+    /* border: red 1px solid; */
+
   }
 
   .orders-container {
@@ -250,7 +266,7 @@
   }
   .food-items {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Adjusted grid for larger cards */
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Adjusted grid for larger cards */
     gap: 20px;
   }
 }

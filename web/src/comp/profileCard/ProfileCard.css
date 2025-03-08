@@ -1,0 +1,87 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    /* background-color: #f0f8ff; */
+    padding: 10px 40px;
+    /* border: red solid 1px; */
+    margin-top: 50px;
+}
+
+.profile-card {
+    display: flex;
+    /* border: red solid 1px; */
+    width: 100%;
+    align-items: center;
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+    /* gap: 20px; */
+    flex-wrap: wrap;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex-grow: 1;
+    /* border: 1px red solid; */
+    display: flex;
+    flex-direction: column;
+    row-gap: 0px;
+    padding: 20px;
+}
+.profile-info h1, .profile-info p, .profile-info span {
+    margin: 8px 0px;
+    color: rgb(119, 119, 119);
+}
+.profile-name {
+    color: #007bff;
+    margin: 0;
+}
+
+
+.profile-buttons {
+    display: flex;
+    gap: 10px;
+    height: 100%;
+    /* border: red solid 1px; */
+}
+
+.edit-btn, .logout-btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-btn {
+    background: #007bff;
+    color: #fff;
+}
+
+.logout-btn {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+.profile-container {
+    margin-top: 100px;
+}
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-buttons {
+        justify-content: center;
+    }
+}

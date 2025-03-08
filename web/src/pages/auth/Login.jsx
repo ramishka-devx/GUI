@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Login.css"; // Import the new CSS file
 import Logo from "../../comp/logo/Logo";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setUser }) => {
   const {
     register,
     handleSubmit,
@@ -23,6 +23,12 @@ const Login = ({ setIsLoggedIn }) => {
       toast.success(response.data.message);
       localStorage.setItem("token", response.data.token);
       setIsLoggedIn(true);
+
+      setUser({
+        name : response.data.Name || "guest",
+        email : response.data.email || " ",
+        isAdmin : response.data.type == "admin" ? true : false
+      })
 
       if (response?.data?.type === "admin") {
         localStorage.setItem("canteenId", response.data.canteenId);

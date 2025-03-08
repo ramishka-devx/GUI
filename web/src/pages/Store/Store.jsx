@@ -73,7 +73,7 @@ const Orders = ({ setCartItemCounter }) => {
       const loadFoods = async () => {
         try {
           setLoadingFoods(true);
-          const foodData = await fetchFoods(selectedCategory, currentPage, 3); // Limit 2 items per page
+          const foodData = await fetchFoods(selectedCategory, currentPage, 12); // Limit 2 items per page
           setFoods(foodData.foods);
           setTotalPages(foodData.pagination.totalPages); // Update total pages
         } catch (error) {
@@ -156,6 +156,7 @@ const Orders = ({ setCartItemCounter }) => {
           ) : (
             <select
               id="canteen"
+              className="canteen-select"
               value={selectedCanteen || ""}
               onChange={(e) => setSelectedCanteen(Number(e.target.value))}
             >
@@ -196,7 +197,7 @@ const Orders = ({ setCartItemCounter }) => {
         {loadingFoods ? (
           <div className="food-items">
             {[1, 2, 3].map((_, index) => (
-              <div key={index} className="food-card">
+              <div key={index} className="food-card-loading">
                 <Skeleton height={150} width="100%" />
                 <Skeleton
                   height={20}
@@ -211,97 +212,52 @@ const Orders = ({ setCartItemCounter }) => {
           <div>
             <div className="food-items">
               {foods.map((food) => (
-                // <div key={food.foodId} className="food-card">
-                //   <img
-                //     src={food.image_url}
-                //     alt={food.title}
-                //     className="food-image"
-                //   />
-                //   <div className="food-details">
-                //     <h4>{food.title}</h4>
-                //     <p className="food-price">LKR {food.price.toFixed(2)}</p>
-                //   </div>
-                //   <div className="food-actions">
-                //     {isInCart(food.foodId) ? (
-                //       <button
-                //         className="btn remove-from-cart"
-                //         onClick={() => removeFromCart(food.foodId)}
-                //       >
-                //         Remove
-                //       </button>
-                //     ) : (
-                //       <>
-                //         <input
-                //           type="number"
-                //           min="1"
-                //           defaultValue="1"
-                //           className="quantity-input"
-                //           id={`quantity-${food.foodId}`}
-                //         />
-                //         <button
-                //           className="btn add-to-cart"
-                //           onClick={() =>
-                //             addToCart(
-                //               food,
-                //               Number(
-                //                 document.getElementById(
-                //                   `quantity-${food.foodId}`
-                //                 ).value
-                //               )
-                //             )
-                //           }
-                //         >
-                //           Add to Cart
-                //         </button>
-                //       </>
-                //     )}
-                //   </div>
-                // </div>
                 <div key={food.foodId} className="card-container">
-  <img
-    src={food.image_url}
-    alt={food.title}
-    className="card-image"
-  />
-  <div className="card-content">
-    <h4 className="card-title">{food.title}</h4>
-    <p className="card-price">LKR {food.price.toFixed(2)}</p>
-  </div>
-  <div className="card-actions">
-    {isInCart(food.foodId) ? (
-      <button
-        className="remove-from-cart"
-        onClick={() => removeFromCart(food.foodId)}
-      >
-        Remove
-      </button>
-    ) : (
-      <>
-        <input
-          type="number"
-          min="1"
-          defaultValue="1"
-          className="quantity-input"
-          id={`quantity-${food.foodId}`}
-        />
-        <button
-          className="add-to-cart"
-          onClick={() =>
-            addToCart(
-              food,
-              Number(
-                document.getElementById(`quantity-${food.foodId}`).value
-              )
-            )
-          }
-        >
-          Add to Cart
-        </button>
-      </>
-    )}
-  </div>
-</div>
-
+                  <img
+                    src={food.image_url}
+                    alt={food.title}
+                    className="card-image"
+                  />
+                  <div className="card-content">
+                    <h4 className="card-title">{food.title}</h4>
+                    <p className="card-price">LKR {food.price.toFixed(2)}</p>
+                  </div>
+                  <div className="card-actions">
+                    {isInCart(food.foodId) ? (
+                      <button
+                        className="btn remove-from-cart"
+                        onClick={() => removeFromCart(food.foodId)}
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      <>
+                        <input
+                          type="number"
+                          min="1"
+                          defaultValue="1"
+                          className="quantity-input"
+                          id={`quantity-${food.foodId}`}
+                        />
+                        <button
+                          className="add-to-cart"
+                          onClick={() =>
+                            addToCart(
+                              food,
+                              Number(
+                                document.getElementById(
+                                  `quantity-${food.foodId}`
+                                ).value
+                              )
+                            )
+                          }
+                        >
+                          Add to Cart
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
               ))}
             </div>
 
@@ -311,7 +267,7 @@ const Orders = ({ setCartItemCounter }) => {
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
               >
-                Previous
+                Prev
               </button>
               <span>
                 Page {currentPage} of {totalPages}
@@ -323,6 +279,7 @@ const Orders = ({ setCartItemCounter }) => {
                 Next
               </button>
             </div>
+
           </div>
         )}
       </div>

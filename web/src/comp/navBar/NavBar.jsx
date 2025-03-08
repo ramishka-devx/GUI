@@ -12,6 +12,7 @@ const Navbar = ({
   cartItemCounter,
   setIsSideNavOpen,
   isSideNavOpen,
+  user
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -67,7 +68,7 @@ const Navbar = ({
             <span className="cart-badge">{cartItemCounter}</span>
           </Link>
         </button>
-        {isLoggedIn && <ProfileDropdown handleSignOut={handleSignOut} />}
+        {isLoggedIn && <ProfileDropdown handleSignOut={handleSignOut} user = {user} />}
 
         {!isLoggedIn && (
           <div className="auth-box">

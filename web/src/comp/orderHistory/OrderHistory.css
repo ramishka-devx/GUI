@@ -24,15 +24,18 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    /* border: 1px solid red; */
+    width: 100%;
+    /* width: 50%; */
   }
   
   /* Order Card */
   .order-card {
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 3px;
     background-color: #fff;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
   }
   
   .order-header {
@@ -45,56 +48,65 @@
   .order-header h3 {
     margin: 0;
     font-size: 1.5rem;
-    color: #555;
+    color: #696868;
   }
   
   .order-date,
   .order-status {
     margin: 0;
     font-size: 1rem;
-    color: #666;
+    color: #666666af;
   }
   
   .order-status .pending {
-    color: #ff9800;
+    color: #B45309;
+    background: #f7dc56e0;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    border-radius: 16px;
   }
   
   .order-status .completed {
-    color: #4caf50;
+    color: #10571c;
+    background: #b2fa9ce0;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    border-radius: 16px;
   }
   
   /* Order Items */
   .order-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 15px;
+    /* border: red solid 1px; */
   }
   
   .order-item {
     border: 1px solid #eee;
     border-radius: 5px;
     padding: 10px;
-    background-color: #f9f9f9;
+    background-color: #4dade938;
   }
   
   .item-title {
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: #575757;
   }
   
   .item-details {
     font-size: 0.9rem;
     margin-bottom: 5px;
-    color: #666;
+    color: #979797;
   }
   
   .item-total {
     font-size: 0.9rem;
     font-weight: bold;
-    color: #000;
+    color: #838383;
   }
   
   /* Order Footer */
@@ -102,7 +114,7 @@
     text-align: right;
     font-size: 1.2rem;
     font-weight: bold;
-    color: #000;
+    color: #a1a1a1;
   }
   
   /* Responsive Design */

@@ -20,7 +20,7 @@ const OrderHistory = ({ orders, loading }) => {
               <div className="order-items">
                 {[1, 2].map((itemIndex) => (
                   <div key={itemIndex} className="order-item">
-                    <Skeleton width="80%" height={15} />
+                    <Skeleton width="10%" height={15} />
                     <Skeleton width="60%" height={15} />
                     <Skeleton width="40%" height={15} />
                   </div>
@@ -39,7 +39,6 @@ const OrderHistory = ({ orders, loading }) => {
   console.log("Orders:", orders);
   return (
     <div className="order-history-container">
-      <h1 className="order-history-title">Order History</h1>
       {orders.length === 0 ? (
         <p className="no-orders">No orders found.</p>
       ) : (
@@ -48,9 +47,9 @@ const OrderHistory = ({ orders, loading }) => {
             <div key={order.orderId} className="order-card">
               <div className="order-header">
                 <h3>Order ID: {order.orderId}</h3>
-                <p className="order-date">Date: {new Date(order.date).toLocaleString()}</p>
+                <p className="order-date">{new Date(order.date).toLocaleString()}</p>
                 <p className="order-status">
-                  Status:{" "}
+                  {/* Status:{" "} */}
                   <span className={order.order_status === 0 ? "pending" : "completed"}>
                     {order.order_status === 0 ? "Pending" : "Completed"}
                   </span>

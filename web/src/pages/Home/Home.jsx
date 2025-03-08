@@ -4,6 +4,7 @@ import HeroSection from '../../comp/Hero/Hero';
 import FeedBack from '../../comp/feedBack/FeedBack';
 import Contact from '../../comp/Contact/Contact';
 import Footer from '../../comp/footer/Footer';
+import Welcome from '../../comp/welcome/Welcome';
 
 const Home = () => {
   const contactRef = useRef(null);  
@@ -21,8 +22,10 @@ const Home = () => {
 
   return (
     <>
+      <Welcome />
       <HeroSection />
       <FeedBack />
+
       <div ref={contactRef}> 
         <Contact />
       </div>

@@ -14,11 +14,11 @@
     height: 35px;
     border-radius: 50%;
     border: 2px solid #d1d5db; /* Adds a subtle border around the photo */
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.1s, border-color 0.2s;
   }
   
   .profile-photo:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
     border-color: #4a90e2;
   }
   
@@ -32,7 +32,12 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     width: 240px;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.1s ease-in-out;
+    overflow: hidden;
+  }
+  .dropdown-phone{
+    color: #616161;
+    font-size: 14px !important;
   }
   
   @keyframes fadeIn {
