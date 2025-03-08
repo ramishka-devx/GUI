@@ -14,6 +14,7 @@ const getOrdersAdmin = async (req, res) => {
         const queryParams = [selectedDate];
         queryParams.push(canteenId);
 
+        console.log("hello")
         if (search) {
             searchQuery = `
             AND (

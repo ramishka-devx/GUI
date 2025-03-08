@@ -45,17 +45,12 @@ const App = () => {
     setCartItemCounter(storedCart.length);
   }, []);
 
-  const ShowNavbarOrAdmin = () => {
-    const location = useLocation();
-    const isAdminRoute = location.pathname.startsWith("/admin");
-
-    return isAdminRoute ? <AdminHome user = {user} /> : <Navbar user = {user} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} cartItemCounter={cartItemCounter} setIsSideNavOpen = {setIsSideNavOpen} isSideNavOpen = {isSideNavOpen} />;
-  };
+  
 
   return (
   
     <Router>
-      <ShowNavbarOrAdmin />
+      <Navbar user = {user} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} cartItemCounter={cartItemCounter} setIsSideNavOpen = {setIsSideNavOpen} isSideNavOpen = {isSideNavOpen} />
       <ScrollToTop/>
       
       <SideNav isSideNavOpen={isSideNavOpen} setIsSideNavOpen={setIsSideNavOpen} isLoggedIn = {isLoggedIn} />
@@ -68,6 +63,7 @@ const App = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/contact" element={<Home />} />
         <Route path="/feedback" element={<Home />} />
+        <Route path="/admin/*" element={<AdminHome />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
 

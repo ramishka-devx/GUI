@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import "./SideNavBar.css"; // Import the CSS file
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import UserMenu from "../navBar/UserMenu";
+import AdminMenu from "../navBar/AdminMenu";
 
 const SideNav = ({isSideNavOpen,setIsSideNavOpen, isLoggedIn}) => {
+    const location = useLocation();
 
     const toggleNav = () => {
         setIsSideNavOpen(!isSideNavOpen);
-      };
+    };
+
+    const isAdminRoute = location.pathname.startsWith("/admin");
+
 return (
     <>
         <div className={`side-nav ${isSideNavOpen ? "open" : ""}`}>
             <ul>
-                <li><Link to="/home">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/services">Services</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
+               {
+                  !isAdminRoute ? <UserMenu/> :<AdminMenu/>
+               }
             </ul>
 
            {

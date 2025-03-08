@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./NavBar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import ProfileDropdown from "../../admin/components/ProfileDropDown/ProfileDropDown";
 import { RiMenu3Line } from "react-icons/ri";
+import UserMenu from "./UserMenu";
+import AdminMenu from "./AdminMenu";
 
 const Navbar = ({
   isLoggedIn,
@@ -17,6 +19,9 @@ const Navbar = ({
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   const toggleProfile = () => {
     setProfileOpen(!profileOpen);
@@ -33,6 +38,11 @@ const Navbar = ({
     setIsSideNavOpen(!isSideNavOpen);
   };
 
+
+
+
+
+
   console.log("log" + isLoggedIn);
   return (
     <div className="navbar">
@@ -43,22 +53,10 @@ const Navbar = ({
       </div>
 
       <div className="menu-container">
-        <ul>
-          <li>
-            <Link to="/" className="active">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/store">Order</Link>
-          </li>
-          <li>
-            <Link to="/feedback">Feedback</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
+        {
+          !isAdminRoute ? <UserMenu/> :<AdminMenu/>
+        }
+     
       </div>
 
       <div className="personal-container">

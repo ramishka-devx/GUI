@@ -63,7 +63,7 @@ const ProfileDropdown = ({ handleSignOut }) => {
     <div className="profile-dropdown" ref={dropdownRef}>
       <button className="profile-button" onClick={toggleDropdown}>
         <img
-          src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+          src="https://res.cloudinary.com/duiyr5sr0/image/upload/v1741422586/images_zoui8t.png"
           alt="Profile"
           className="profile-photo"
         />

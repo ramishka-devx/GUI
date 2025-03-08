@@ -238,11 +238,11 @@ const DailyOrdersGraph = ({ setIsLoading }) => {
         </button>
       </div>
 
-      <div className="chart-wrapper">
+      <div className="chart-wrapper line-chart">
         <Line data={lineData} options={lineOptions} />
       </div>
 
-      <div className="chart-wrapper">
+      <div className="chart-wrapper pie-chart">
         {/* <h3>Food Item Sales Breakdown</h3> */}
         <Pie data={pieData} options={pieOptions} />
       </div>

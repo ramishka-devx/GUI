@@ -8,6 +8,7 @@ import DisplayFoods from '../displayFoods/DisplayFoods'
 import DashBoard from '../dashboard/DashBoard'
 import UpdateFood from '../Update/UpdateFood'
 import LoadingBanner from '../../../comp/LoadingBanner/LoadingBanner'
+import Navbar from '../../../comp/navBar/NavBar'
 
 const AdminHome = () => {
 
@@ -17,13 +18,14 @@ const AdminHome = () => {
     <div>
     {isbannerLoading && <LoadingBanner />}
 
-        <AdminNavBar />
+        {/* <AdminNavBar /> */}
+        {/* <Navbar/> */}
         <Routes>
-          <Route path="/admin/" element={<DashBoard />} />
-          <Route path="/admin/orders" element={<SeeOrders setIsbannerLoading = {setIsbannerLoading} />} />
-          <Route path="/admin/foods/" element={<DisplayFoods />} />
-          <Route path="/admin/foods/add" element={<AddFood />} />
-          <Route path="/admin/foods/edit/:foodId" element={<UpdateFood />} />
+          <Route path="/" element={<DashBoard />} />
+          <Route path="/orders" element={<SeeOrders setIsbannerLoading = {setIsbannerLoading} />} />
+          <Route path="/foods/" element={<DisplayFoods />} />
+          <Route path="/foods/add" element={<AddFood />} />
+          <Route path="/foods/edit/:foodId" element={<UpdateFood />} />
         </Routes>
    
     </div>

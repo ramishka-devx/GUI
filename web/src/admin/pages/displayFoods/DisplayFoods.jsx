@@ -137,12 +137,12 @@ const DisplayFoods = () => {
                 <div className="action-cell">
                   <Link to={`/admin/foods/edit/${food.foodId}`}>
                     {" "}
-                    <button>
+                    <button className="edit-button">
                       <MdEdit color="#72BF78" size={20} />
                     </button>{" "}
                   </Link>
 
-                  <button>
+                  <button className="status-button">
                     {food.status === 1 ? (
                       <MdOutlineDeleteOutline
                         onClick={() => handleUpdateStatus(food.foodId, 0)} // Wrap in arrow function

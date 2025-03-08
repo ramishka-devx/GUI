@@ -1,12 +1,15 @@
 .graph-container {
     width: 100%;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
+    display: block;
     padding: 20px;
-    background: #f9f9f9;
+    /* background: #f9f9f9; */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     margin-top: 20px;
+    /* border: red 1px solid; */
+    height: fit-content;
   }
   
   .graph-container h2 {
@@ -19,16 +22,23 @@
   
   .date-range-form {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
-    gap: 15px;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
+    box-sizing: border-box;
+
   }
 
+  .filter-card{
+    /* border: 1px solid #df1212; */
+    box-sizing: border-box;
+
+  }
  
 
-  .date-range-form label {
+  /* .date-range-form label {
     font-size: 1rem;
     color: #07070791;
     font-weight: 600;
@@ -36,7 +46,7 @@
     align-items: center;
     gap: 10px;
     white-space: nowrap;
-  }
+  } */
   
   .date-range-form input {
     padding: 8px 10px;
@@ -45,6 +55,9 @@
     border-radius: 5px;
     transition: border-color 0.3s ease;
     color: #070707a4 ;
+    width: 100%;
+    box-sizing: border-box;
+    
   }
   
   .date-range-form input:focus {
@@ -82,7 +95,8 @@
     background: #fff;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    border: rgb(211, 211, 211) 1px solid;
     width: 100%;
     max-width: 100%; /* Ensures the chart fits inside its container */
     overflow-x: auto; 
@@ -91,6 +105,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+
   }
   
   .chart-wrapper canvas {
@@ -110,11 +126,14 @@
     .graph-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 20px;
       grid-template-areas: 
         "header date-range"
-        "line-chart pie-chart";
+        "line-chart  pie-chart";
       gap: 10px 20px;
       padding: 20px;
+      width: 90%;
+      /* border: 1px red solid; */
     }
     
     .graph-container h2 {
@@ -127,6 +146,7 @@
     
     .date-range-form {
       grid-area: date-range;
+      /* border: red solid 1px; */
     }
     
     .line-chart {
@@ -135,6 +155,8 @@
     
     .pie-chart {
       grid-area: pie-chart;
+      padding: 50px;
+      max-width: 85%;
     }
     .date-range-form{
       /* border: red solid 1px; */

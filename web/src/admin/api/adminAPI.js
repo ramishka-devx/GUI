@@ -9,7 +9,7 @@ export const fetchOrdersByDate = async (selectedDate, search, canteenId) => {
   try {
     const response = await fetch(
       `${baseURL}/admin/orders?selectedDate=${selectedDate}&search=${search}&canteenId=${canteenId}`,
-      { method: "POST" }
+      { method: "GET" }
     );
     const result = await response.json();
 
