@@ -41,13 +41,13 @@ const Footer = () => {
             <p>
               Email:{" "}
               <a href="mailto:info@cafeteria.com" className="footer-link">
-                info@cafeteria.com
+                info@kalderama.lk
               </a>
             </p>
             <p>
               Phone:{" "}
               <a href="tel:+123456789" className="footer-link">
-                +1 234 567 89
+                 0711120401
               </a>
             </p>
           </div>

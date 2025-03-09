@@ -3,39 +3,46 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="DashboardHome">
 
-    <Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
-            <!-- Total Orders -->
-            <Border Background="LightBlue" Padding="15" Margin="10" CornerRadius="10">
-                <StackPanel>
-                    <TextBlock Text="Total Orders" FontSize="14" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Center"/>
-                    <TextBlock Name="txtTotalOrders" Text="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-            <!-- Total Revenue -->
-            <Border Background="LightGreen" Padding="15" Margin="10" CornerRadius="10">
-                <StackPanel>
-                    <TextBlock Text="Total Revenue" FontSize="14" FontWeight="Bold" Foreground="Green" HorizontalAlignment="Center"/>
-                    <TextBlock Name="txtTotalRevenue" Text="LKR 0.00" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
+        <!-- Total Orders -->
+        <Border Background="LightBlue" Padding="30" Margin="15" CornerRadius="15" Grid.Row="0" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="Total Orders" FontSize="18" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Center"/>
+                <TextBlock Name="txtTotalOrders" Text="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
 
-            <!-- Pending Orders -->
-            <Border Background="LightYellow" Padding="15" Margin="10" CornerRadius="10">
-                <StackPanel>
-                    <TextBlock Text="Pending Orders" FontSize="14" FontWeight="Bold" Foreground="Orange" HorizontalAlignment="Center"/>
-                    <TextBlock Name="txtPendingOrders" Text="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
+        <!-- Total Revenue -->
+        <Border Background="LightGreen" Padding="30" Margin="15" CornerRadius="15" Grid.Row="0" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="Total Revenue" FontSize="18" FontWeight="Bold" Foreground="Green" HorizontalAlignment="Center"/>
+                <TextBlock Name="txtTotalRevenue" Text="LKR 0.00" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
 
-            <!-- Completed Orders -->
-            <Border Background="Lavender" Padding="15" Margin="10" CornerRadius="10">
-                <StackPanel>
-                    <TextBlock Text="Completed Orders" FontSize="14" FontWeight="Bold" Foreground="Purple" HorizontalAlignment="Center"/>
-                    <TextBlock Name="txtCompletedOrders" Text="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+        <!-- Pending Orders -->
+        <Border Background="LightYellow" Padding="30" Margin="15" CornerRadius="15" Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="Pending Orders" FontSize="18" FontWeight="Bold" Foreground="Orange" HorizontalAlignment="Center"/>
+                <TextBlock Name="txtPendingOrders" Text="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Completed Orders -->
+        <Border Background="Lavender" Padding="30" Margin="15" CornerRadius="15" Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="Completed Orders" FontSize="18" FontWeight="Bold" Foreground="Purple" HorizontalAlignment="Center"/>
+                <TextBlock Name="txtCompletedOrders" Text="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

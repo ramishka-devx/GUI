@@ -17,8 +17,14 @@ namespace kalderama
         {
             InitializeComponent();
             dpSelectedDate.SelectedDate = DateTime.Today; // Set default date to today
-            LoadOrdersData();
+            this.Loaded += Orders_Loaded; // Reload API when page loads
         }
+
+        private void Orders_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            LoadOrdersData(); // Reload orders data when the page is loaded
+        }
+
 
         private async void LoadOrdersData(string searchQuery = "")
         {

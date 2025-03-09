@@ -57,7 +57,7 @@ const getFoodsByCategory = async (req, res) => {
 
     try {
         // Query to get the total count of foods for the given category
-        const q = "SELECT COUNT(*) as count FROM foods WHERE categoryId = ?"
+        const q = "SELECT COUNT(*) as count FROM foods WHERE categoryId = ? AND status = 1"
         db.query(q, [categoryId], (error, results) => {
             if (error) {
                 console.error("Error fetching food count:", error.message);
@@ -68,7 +68,7 @@ const getFoodsByCategory = async (req, res) => {
             const totalPages = Math.ceil(totalItems / limit);
 
             // Query to get the paginated foods
-            db.query("SELECT * FROM foods WHERE categoryId = ? LIMIT ? OFFSET ?", [categoryId, limit, offset], (error, foods) => {
+            db.query("SELECT * FROM foods WHERE categoryId = ? AND status = 1 LIMIT ? OFFSET ?", [categoryId, limit, offset], (error, foods) => {
                 if (error) {
                     console.error("Error fetching foods:", error.message);
                     return res.status(500).json({ error: 'Failed to fetch foods' });

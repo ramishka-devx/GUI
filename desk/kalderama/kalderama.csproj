@@ -12,6 +12,7 @@
     <None Remove="img\profile-icon.png" />
     <None Remove="img\profile-icon2.png" />
     <None Remove="logo.png" />
+    <None Remove="logo2.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,9 @@
     <Resource Include="img\profile-icon.png" />
     <Resource Include="img\profile-icon2.png" />
     <Resource Include="logo.png" />
+    <Resource Include="logo2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

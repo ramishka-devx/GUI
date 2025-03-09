@@ -85,7 +85,7 @@
             <Border Background="#007bff" Padding="10" HorizontalAlignment="Center" Grid.Row="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,0" 
-               Source="logo.png" Width="135" Stretch="Uniform"/>
+               Source="logo2.png" Width="135" Stretch="Uniform"/>
                 </StackPanel>
             </Border>
 
