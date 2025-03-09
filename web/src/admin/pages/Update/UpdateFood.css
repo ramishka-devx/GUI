@@ -2,9 +2,8 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background: #f9f9f9;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   .update-food-title {
@@ -66,3 +65,11 @@
     color: red;
   }
   
+  @media screen and (min-width: 768px) {
+    .update-food-container{
+      margin-top: 50px;
+      width: 40%;
+    }
+    
+    
+  }

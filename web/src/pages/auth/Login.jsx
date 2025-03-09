@@ -16,19 +16,21 @@ const Login = ({ setIsLoggedIn, setUser }) => {
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isloading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
     try {
+      setIsLoading(true);
       const response = await loginUser(data);
       toast.success(response.data.message);
       localStorage.setItem("token", response.data.token);
       setIsLoggedIn(true);
 
       setUser({
-        name : response.data.Name || "guest",
-        email : response.data.email || " ",
-        isAdmin : response.data.type == "admin" ? true : false
-      })
+        name: response.data.Name || "guest",
+        email: response.data.email || " ",
+        isAdmin: response.data.type == "admin" ? true : false,
+      });
 
       if (response?.data?.type === "admin") {
         localStorage.setItem("canteenId", response.data.canteenId);
@@ -41,6 +43,8 @@ const Login = ({ setIsLoggedIn, setUser }) => {
         error.response?.data?.message || "Something went wrong";
       toast.error(errorMessage);
       console.error("Error:", errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,7 +109,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
           </div>
 
           <button type="submit" className="submit-button">
-            Log in
+            {!isloading ? "Login" : "Logging in..."}
           </button>
         </form>
       </div>

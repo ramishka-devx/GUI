@@ -10,6 +10,7 @@ const Home = () => {
   const contactRef = useRef(null);  
   const feedRef = useRef(null);  
   const location = useLocation();   
+  
   useEffect(() => {
     if (location.pathname === '/feedback' && feedRef.current) {
       feedRef.current.scrollIntoView({ behavior: 'smooth' });

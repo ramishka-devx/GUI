@@ -4,6 +4,7 @@ import CategorySelect from "../../components/selectCategories/SelectCatogory";
 import "./NewFood.css";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const AddFood = () => {
@@ -15,6 +16,9 @@ const AddFood = () => {
     status: "",
     image: null,
   });
+
+  const [isloading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const [imagePreview, setImagePreview] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
@@ -37,6 +41,7 @@ const AddFood = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const data = new FormData();
     data.append("categoryId", formData.categoryId);
@@ -67,15 +72,18 @@ const AddFood = () => {
         image: null,
       });
       setImagePreview(null);
+      navigate("/admin/foods");
     } catch (error) {
       setErrorMessage("Failed to add food. Please try again.");
       setSuccessMessage("");
       toast.error("Failed to add food. Please try again.");
+    }finally{
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="container">
+    <div className="new-food-container">
       <h2 className="title">Add New Food</h2>
 
      
@@ -128,7 +136,9 @@ const AddFood = () => {
 
         {/* Submit Button */}
         <button type="submit" className="submit-button">
-          Add Food
+          {
+            !isloading ? "Create" : "Creating..."
+          }
         </button>
       </form>
     </div>

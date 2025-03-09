@@ -1,10 +1,13 @@
-.container {
+.new-food-container {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
+    display: block;
+    box-sizing: border-box;
+    color: #707070;
   }
   
   .title {
@@ -15,6 +18,9 @@
   
   .form-group {
     margin-bottom: 15px;
+  }
+  .form-group input[type="file"] {
+    background: #000;
   }
   
   label {
@@ -30,6 +36,7 @@
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
   }
   
   .image-preview img {
@@ -63,4 +70,13 @@
   .submit-button:hover {
     background-color: #45a049;
   }
+
+
   
+  @media screen and (min-width: 768px) {
+    .new-food-container {
+      width: 40%;
+      padding: 30px;
+    }
+    
+  }

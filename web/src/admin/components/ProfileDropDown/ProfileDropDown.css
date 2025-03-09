@@ -29,7 +29,8 @@
     background: #ffffff;
     color: #131212;
     border-radius: 8px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); */
+    border: 1px solid #e5e7eb;
     z-index: 1000;
     width: 240px;
     animation: fadeIn 0.1s ease-in-out;

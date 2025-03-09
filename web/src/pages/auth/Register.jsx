@@ -9,6 +9,7 @@ import Logo from '../../comp/logo/Logo';
 
 const Register = () => {
   const navigate = useNavigate();
+  const [isloading, setIsLoading] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -17,6 +18,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
+      setIsLoading(true);
       const response = await registerUser(data);
       toast.success(response.data.message || 'User registered successfully');
       navigate('/login');
@@ -27,6 +29,8 @@ const Register = () => {
         'Something went wrong';
       toast.error(errorMessage);
       console.error('Error:', errorMessage);
+    }finally{
+      setIsLoading(false);
     }
   };
 
@@ -86,6 +90,20 @@ const Register = () => {
             )}
           </div>
 
+          {/* Email */}
+          <div className="form-group">
+            <label className="form-label">Phone:</label>
+            <input
+              type="phone"
+              {...register('phone', { required: 'phone is required' })}
+              className="form-input"
+              placeholder="Enter your phone"
+            />
+            {errors.phone && (
+              <p className="error-message">{errors.phone.message}</p>
+            )}
+          </div>
+
           {/* Password */}
           <div className="form-group">
             <label className="form-label">Password:</label>
@@ -134,7 +152,9 @@ const Register = () => {
           </div>
 
           <button type="submit" className="submit-button">
-            Register
+            {
+              !isloading ? "Register" : "Registering..."
+          }
           </button>
         </form>
       </div>

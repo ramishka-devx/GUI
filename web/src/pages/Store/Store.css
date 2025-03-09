@@ -82,8 +82,9 @@
 /* Food Card Container */
 .food-items {
   display: grid;
-  grid-template-columns: 1fr; /* Adjusted grid for larger cards */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ensure all items have the same width */
   gap: 20px;
+  grid-auto-rows: 1fr;
 }
 
 /* Food Card */

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./UpdateFood.css";
+import { toast } from "react-toastify";
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const UpdateFood = () => {
@@ -62,7 +63,7 @@ const UpdateFood = () => {
       });
 
       if (response.ok) {
-        alert("Food updated successfully!");
+        toast.success("Food updated successfully!");
         navigate("/admin/foods"); // Redirect to the foods list page
       } else {
         const errorData = await response.json();
